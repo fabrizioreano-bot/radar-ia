@@ -1,5 +1,10 @@
 {
   "ultima_actualizacion": "Hace 2 mins",
+  "alertas": [
+    {"tipo": "caida", "titulo": "Caída de Plin en Betsson", "mensaje": "El botón de recarga con Plin fue deshabilitado temporalmente.", "tiempo": "Hace 15 min"},
+    {"tipo": "cambio", "titulo": "Cambio de Mínimo - Betano", "mensaje": "Betano subió su retiro mínimo por transferencia a S/ 20.00.", "tiempo": "Hace 2 horas"},
+    {"tipo": "promo", "titulo": "Nueva Promo - Apuesta Total", "mensaje": "Bono del 100% por recarga con Yape Directo.", "tiempo": "Ayer, 18:30"}
+  ],
   "productos": {
     "deportes": [
       {"casa": "Te Apuesto", "codigo": "TA", "color": "#ff5500", "apuesta_min": "S/ 1.00", "apuesta_max": "S/ 5,000", "ganancia_max": "S/ 500,000", "cashout": "Limitado", "url": "https://www.teapuesto.pe"},
