@@ -32,14 +32,8 @@
         .alerts-header span { font-size: 11px; color: #ef4444; background: #fee2e2; padding: 2px 8px; border-radius: 12px; }
         .alert-item { padding: 16px; border-bottom: 1px solid #f8fafc; display: flex; gap: 12px; align-items: flex-start; transition: 0.2s; cursor: pointer; }
         .alert-item:hover { background-color: #f8fafc; }
-        .alert-item:last-child { border-bottom: none; }
-        .alert-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
-        .alert-content h4 { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 2px; }
-        .alert-content p { font-size: 12px; color: #64748b; line-height: 1.4; }
-        .alert-time { font-size: 10px; color: #94a3b8; margin-top: 6px; display: block; font-weight: 600; }
-
-        .content { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
         
+        .content { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
         .vista-seccion { display: none; }
         .vista-seccion.activa { display: block; }
 
@@ -52,10 +46,12 @@
         .brand-icon { width: 32px; height: 32px; border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; }
         
         .pill-btn { 
-            background-color: #f1f5f9; color: #0f172a; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; margin-right: 6px; margin-bottom: 4px;
+            background-color: #f1f5f9; color: #0f172a; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; margin-right: 6px; margin-bottom: 6px;
             border: 1px solid #cbd5e1; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s;
         }
         .pill-btn:hover { background-color: #ff5500; color: #ffffff; border-color: #ff5500; transform: translateY(-1px); }
+        .time-tag { font-size: 10px; color: #16a34a; font-weight: 800; background: #dcfce7; padding: 2px 6px; border-radius: 4px; }
+        .pill-btn:hover .time-tag { background: #ffffff; color: #ff5500; }
 
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); justify-content: center; align-items: center; z-index: 1000; }
         .modal-card { background: white; border-radius: 16px; padding: 28px; width: 420px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); position: relative; }
@@ -63,29 +59,21 @@
         .modal-title { font-size: 18px; font-weight: 800; color: #0f172a; }
         .close-btn { cursor: pointer; color: #64748b; border: none; background: none; font-size: 20px; }
         .detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f8fafc; font-size: 14px; }
-        .detail-row:last-child { border-bottom: none; }
         .detail-label { color: #64748b; font-weight: 500; }
         .detail-val { font-weight: 700; color: #0f172a; }
+        
+        .badge { padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: #f1f5f9; color: #475569; }
     </style>
 </head>
 <body>
     <aside class="sidebar">
         <div>
             <div class="brand">B-<span>IA</span></div>
-            <!-- Menú Lateral 100% Separado -->
             <ul class="nav-list">
-                <li class="nav-item active" onclick="cambiarPestana('recargas', this)">
-                    <i data-lucide="arrow-down-left"></i> Métodos de Recarga
-                </li>
-                <li class="nav-item" onclick="cambiarPestana('cobros', this)">
-                    <i data-lucide="arrow-up-right"></i> Cobros y Retiros
-                </li>
-                <li class="nav-item" onclick="cambiarPestana('deportes', this)">
-                    <i data-lucide="trophy"></i> Apuestas Deportivas
-                </li>
-                <li class="nav-item" onclick="cambiarPestana('flujos', this)">
-                    <i data-lucide="git-merge"></i> Flujos UX
-                </li>
+                <li class="nav-item active" onclick="cambiarPestana('recargas', this)"><i data-lucide="arrow-down-left"></i> Métodos de Recarga</li>
+                <li class="nav-item" onclick="cambiarPestana('cobros', this)"><i data-lucide="arrow-up-right"></i> Cobros y Retiros</li>
+                <li class="nav-item" onclick="cambiarPestana('deportes', this)"><i data-lucide="trophy"></i> Apuestas Deportivas</li>
+                <li class="nav-item" onclick="cambiarPestana('flujos', this)"><i data-lucide="git-merge"></i> Flujos UX</li>
             </ul>
         </div>
     </aside>
@@ -94,7 +82,7 @@
         <header class="top-header">
             <div class="header-title">
                 <h1 id="titulo-pagina">Métodos de Recarga</h1>
-                <p id="subtitulo-pagina">Haz clic sobre las píldoras de pago para consultar límites y tiempos de depósito.</p>
+                <p id="subtitulo-pagina">Consulta los canales disponibles y sus tiempos estimados de acreditación.</p>
             </div>
             
             <div class="header-actions">
@@ -102,11 +90,8 @@
                     <i data-lucide="bell"></i>
                     <div class="bell-badge" id="alerta-punto"></div>
                 </div>
-                
                 <div class="alerts-dropdown" id="alertsMenu">
-                    <div class="alerts-header">
-                        Alertas del Mercado <span id="contador-alertas">0 Nuevas</span>
-                    </div>
+                    <div class="alerts-header">Alertas del Mercado <span id="contador-alertas">0 Nuevas</span></div>
                     <div id="lista-alertas"></div>
                 </div>
             </div>
@@ -114,64 +99,69 @@
 
         <main class="content">
             
-            <!-- VISTA 1: RECARGAS (EXCLUSIVA) -->
             <div id="vista-recargas" class="vista-seccion activa">
                 <div class="table-card">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Operador</th>
-                                <th>Canales Disponibles (Haz clic para ver rangos)</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Operador</th><th>Canales y Tiempos de Recarga (Haz clic para ver límites)</th></tr></thead>
                         <tbody id="tabla-recargas"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- VISTA 2: COBROS (EXCLUSIVA) -->
             <div id="vista-cobros" class="vista-seccion">
                 <div class="table-card">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Operador</th>
-                                <th>Canales de Retiro Disponibles (Haz clic para ver rangos)</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Operador</th><th>Canales y Tiempos de Retiro (Haz clic para ver límites)</th></tr></thead>
                         <tbody id="tabla-cobros"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- VISTA 3: DEPORTES -->
             <div id="vista-deportes" class="vista-seccion">
-                <div class="table-card" style="padding: 40px; text-align: center; color: #64748b;">
-                    <p>Aquí construiremos la tabla de límites de apuestas, ganancias máximas y Cashout.</p>
+                <div class="table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Apuesta Mínima</th>
+                                <th>Apuesta Máxima</th>
+                                <th>Ganancia Máxima</th>
+                                <th>Tipo de Cashout</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-deportes"></tbody>
+                    </table>
                 </div>
             </div>
 
-            <!-- VISTA 4: FLUJOS UX -->
             <div id="vista-flujos" class="vista-seccion">
-                <div class="table-card" style="padding: 40px; text-align: center; color: #64748b;">
-                    <p>Aquí construiremos la auditoría de pasos y tiempos reales.</p>
+                <div class="table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Auditoría de Pasos y Acreditación (Haz clic en el método)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-flujos"></tbody>
+                    </table>
                 </div>
             </div>
 
         </main>
     </div>
 
-    <!-- Modal Flotante de Detalle -->
+    <!-- Modal Dinámico -->
     <div class="modal-overlay" id="modal">
         <div class="modal-card">
             <div class="modal-header">
-                <div class="modal-title" id="m-titulo">Detalle del Método</div>
+                <div class="modal-title" id="m-titulo">Detalle</div>
                 <button class="close-btn" onclick="cerrarModal()">✕</button>
             </div>
             <div class="detail-row"><span class="detail-label">Operador:</span><span class="detail-val" id="m-casa">--</span></div>
-            <div class="detail-row"><span class="detail-label">Monto Mínimo:</span><span class="detail-val" style="color:#16a34a;" id="m-min">--</span></div>
-            <div class="detail-row"><span class="detail-label">Monto Máximo:</span><span class="detail-val" id="m-max">--</span></div>
-            <div class="detail-row"><span class="detail-label">Tiempo Estimado:</span><span class="detail-val" id="m-tiempo">--</span></div>
+            <div class="detail-row"><span class="detail-label" id="label-1">Dato 1:</span><span class="detail-val" style="color:#16a34a;" id="val-1">--</span></div>
+            <div class="detail-row"><span class="detail-label" id="label-2">Dato 2:</span><span class="detail-val" id="val-2">--</span></div>
+            <div class="detail-row" style="border-bottom:none;"><span class="detail-label" id="label-3">Dato 3:</span><span class="detail-val" id="val-3">--</span></div>
         </div>
     </div>
 
@@ -179,15 +169,14 @@
         function cambiarPestana(seccion, elemento) {
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             elemento.classList.add('active');
-
             document.querySelectorAll('.vista-seccion').forEach(el => el.classList.remove('activa'));
             document.getElementById(`vista-${seccion}`).classList.add('activa');
 
             const titulos = {
-                'recargas': { h1: 'Métodos de Recarga', p: 'Haz clic sobre las píldoras de pago para consultar límites y tiempos de depósito.' },
-                'cobros': { h1: 'Canales de Cobro y Retiro', p: 'Haz clic sobre las píldoras de pago para consultar límites y tiempos de retiro.' },
-                'deportes': { h1: 'Benchmarking de Apuestas Deportivas', p: 'Límites, ganancias máximas y disponibilidad de Cashout por operador.' },
-                'flujos': { h1: 'Auditoría de Flujos UX', p: 'Medición de clics y fricción en los procesos de depósito y retiro.' }
+                'recargas': { h1: 'Métodos de Recarga', p: 'Consulta los canales disponibles y sus tiempos estimados de acreditación.' },
+                'cobros': { h1: 'Canales de Cobro y Retiro', p: 'Consulta los canales de salida y sus tiempos de acreditación bancaria.' },
+                'deportes': { h1: 'Límites de Apuestas Deportivas', p: 'Apuestas mínimas, ganancias máximas y Cashout.' },
+                'flujos': { h1: 'Auditoría de Flujos UX', p: 'Medición de clics, pasos y tiempos reales de acreditación.' }
             };
             document.getElementById('titulo-pagina').innerText = titulos[seccion].h1;
             document.getElementById('subtitulo-pagina').innerText = titulos[seccion].p;
@@ -195,16 +184,9 @@
 
         function toggleAlerts() {
             const menu = document.getElementById('alertsMenu');
-            const puntoRojo = document.getElementById('alerta-punto');
-            const isVisible = menu.style.display === 'block';
-            menu.style.display = isVisible ? 'none' : 'block';
-            if (!isVisible) puntoRojo.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.closest('.notification-bell') && !event.target.closest('.alerts-dropdown')) {
-                document.getElementById('alertsMenu').style.display = 'none';
-            }
+            const pRojo = document.getElementById('alerta-punto');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            if (menu.style.display === 'block') pRojo.style.display = 'none';
         }
 
         async function cargarDatos() {
@@ -214,45 +196,73 @@
             if (data.alertas && data.alertas.length > 0) {
                 document.getElementById('alerta-punto').style.display = 'block';
                 document.getElementById('contador-alertas').innerText = `${data.alertas.length} Nuevas`;
-                
-                document.getElementById('lista-alertas').innerHTML = data.alertas.map(alerta => {
-                    let bg = alerta.tipo === 'caida' ? '#fee2e2' : alerta.tipo === 'cambio' ? '#fef3c7' : '#dcfce7';
-                    let color = alerta.tipo === 'caida' ? '#ef4444' : alerta.tipo === 'cambio' ? '#b45309' : '#15803d';
-                    let icon = alerta.tipo === 'caida' ? 'alert-triangle' : alerta.tipo === 'cambio' ? 'trending-up' : 'check-circle';
-                    return `
-                    <div class="alert-item">
-                        <div class="alert-icon" style="background:${bg}; color:${color};"><i data-lucide="${icon}" style="width:16px;"></i></div>
-                        <div class="alert-content"><h4>${alerta.titulo}</h4><p>${alerta.mensaje}</p><span class="alert-time">${alerta.tiempo}</span></div>
-                    </div>`;
-                }).join('');
             }
 
+            // 1. Recargas (Ahora incluye la etiqueta visual de tiempo)
             document.getElementById('tabla-recargas').innerHTML = data.productos.recargas.map(c => `
                 <tr>
                     <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${c.color}">${c.codigo}</div>${c.casa}</div></td>
-                    <td>${c.metodos.map(m => `<button class="pill-btn" onclick='verDetalle("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>${m.nombre} <i data-lucide="info" style="width:12px;height:12px;"></i></button>`).join('')}</td>
+                    <td>${c.metodos.map(m => `
+                        <button class="pill-btn" onclick='verModalCajero("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>
+                            ${m.nombre} <span class="time-tag">${m.tiempo}</span> <i data-lucide="info" style="width:12px;"></i>
+                        </button>`).join('')}
+                    </td>
                 </tr>`).join('');
 
+            // 2. Cobros (Ahora incluye la etiqueta visual de tiempo)
             document.getElementById('tabla-cobros').innerHTML = data.productos.cobros.map(c => `
                 <tr>
                     <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${c.color}">${c.codigo}</div>${c.casa}</div></td>
-                    <td>${c.metodos.map(m => `<button class="pill-btn" onclick='verDetalle("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>${m.nombre} <i data-lucide="info" style="width:12px;height:12px;"></i></button>`).join('')}</td>
+                    <td>${c.metodos.map(m => `
+                        <button class="pill-btn" onclick='verModalCajero("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>
+                            ${m.nombre} <span class="time-tag">${m.tiempo}</span> <i data-lucide="info" style="width:12px;"></i>
+                        </button>`).join('')}
+                    </td>
+                </tr>`).join('');
+
+            // 3. Deportes
+            document.getElementById('tabla-deportes').innerHTML = data.productos.deportes.map(d => `
+                <tr>
+                    <td><div class="brand-cell"><div class="brand-icon" style="background:${d.color}">${d.codigo}</div>${d.casa}</div></td>
+                    <td><b>${d.apuesta_min}</b></td>
+                    <td>${d.apuesta_max}</td>
+                    <td>${d.ganancia_max}</td>
+                    <td><span class="badge">${d.cashout}</span></td>
+                </tr>`).join('');
+
+            // 4. Flujos UX
+            document.getElementById('tabla-flujos').innerHTML = data.productos.flujos.map(f => `
+                <tr>
+                    <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${f.color}">${f.codigo}</div>${f.casa}</div></td>
+                    <td>${f.metodos.map(m => `
+                        <button class="pill-btn" onclick='verModalFlujo("${f.casa}", "${m.nombre}", "${m.clics}", "${m.acreditacion}", "${m.pasos}")'>
+                            ${m.nombre} <span class="time-tag">${m.acreditacion}</span> <i data-lucide="info" style="width:12px;"></i>
+                        </button>`).join('')}
+                    </td>
                 </tr>`).join('');
 
             lucide.createIcons();
         }
 
-        function verDetalle(casa, método, min, max, tiempo) {
-            document.getElementById('m-titulo').innerText = método;
+        function verModalCajero(casa, nombre, min, max, tiempo) {
+            document.getElementById('m-titulo').innerText = nombre;
             document.getElementById('m-casa').innerText = casa;
-            document.getElementById('m-min').innerText = min;
-            document.getElementById('m-max').innerText = max;
-            document.getElementById('m-tiempo').innerText = tiempo;
+            document.getElementById('label-1').innerText = "Monto Mínimo:"; document.getElementById('val-1').innerText = min;
+            document.getElementById('label-2').innerText = "Monto Máximo:"; document.getElementById('val-2').innerText = max;
+            document.getElementById('label-3').innerText = "Tiempo Estimado:"; document.getElementById('val-3').innerText = tiempo;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function verModalFlujo(casa, nombre, clics, tiempo, pasos) {
+            document.getElementById('m-titulo').innerText = "Auditoría: " + nombre;
+            document.getElementById('m-casa').innerText = casa;
+            document.getElementById('label-1').innerText = "Acreditación Real:"; document.getElementById('val-1').innerText = tiempo;
+            document.getElementById('label-2').innerText = "Fricción:"; document.getElementById('val-2').innerText = clics;
+            document.getElementById('label-3').innerText = "Pasos del Usuario:"; document.getElementById('val-3').innerText = pasos;
             document.getElementById('modal').style.display = 'flex';
         }
 
         function cerrarModal() { document.getElementById('modal').style.display = 'none'; }
-
         cargarDatos();
     </script>
 </body>
