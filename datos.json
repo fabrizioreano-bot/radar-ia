@@ -1,0 +1,58 @@
+{
+  "ultima_actualizacion": "Hace 2 mins",
+  "alertas": [
+    {
+      "tipo": "critical",
+      "etiqueta": "MOVIMIENTO CRÍTICO",
+      "titulo": "Betsson bajó apuesta mínima",
+      "descripcion": "Detectado cambio en el boleto de apuestas de S/0.50 a S/0.20 hace 15 minutos."
+    },
+    {
+      "tipo": "opportunity",
+      "etiqueta": "OPORTUNIDAD UX",
+      "titulo": "Apuesta Total activó Yape Directo",
+      "descripcion": "Bot detectó nuevo flujo de recarga con un solo clic saltando PagoEfectivo."
+    },
+    {
+      "tipo": "promo",
+      "etiqueta": "NUEVA PROMOCIÓN",
+      "titulo": "Betano: Bono Liga 1 Flash",
+      "descripcion": "Campaña detectada en Facebook Ads: 100% extra recargando desde S/30 por hoy."
+    }
+  ],
+  "casas": [
+    {
+      "codigo": "TA",
+      "nombre": "TE APUESTO",
+      "color": "#ff5500",
+      "billeteras": ["Yape", "Plin"],
+      "tiempo_retiro": "3 días (Promedio)",
+      "tiempo_clase": "",
+      "apuesta_min": "S/ 1.00",
+      "apuesta_clase": "",
+      "ganancia_max": "S/ 500,000"
+    },
+    {
+      "codigo": "B",
+      "nombre": "Betsson",
+      "color": "#3b82f6",
+      "billeteras": ["PagoEfectivo"],
+      "tiempo_retiro": "✓ 2 días",
+      "tiempo_clase": "text-green",
+      "apuesta_min": "↓ S/ 0.20",
+      "apuesta_clase": "text-red",
+      "ganancia_max": "Sin límite"
+    },
+    {
+      "codigo": "BT",
+      "nombre": "Betano",
+      "color": "#ef4444",
+      "billeteras": ["Yape"],
+      "tiempo_retiro": "1 día",
+      "tiempo_clase": "",
+      "apuesta_min": "S/ 0.50",
+      "apuesta_clase": "",
+      "ganancia_max": "Sin límite"
+    }
+  ]
+}
