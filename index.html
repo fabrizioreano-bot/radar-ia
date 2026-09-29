@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B-IA | Cajero Interactivo</title>
+    <title>B-IA | Panel Ejecutivo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -26,14 +26,10 @@
         .header-actions { display: flex; align-items: center; gap: 20px; }
         .notification-bell { position: relative; cursor: pointer; color: #475569; padding: 8px; border-radius: 50%; transition: 0.2s; }
         .notification-bell:hover { background-color: #f1f5f9; color: #0f172a; }
-        
-        /* El puntito rojo de alerta */
         .bell-badge { position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; border: 2px solid #ffffff; display: none; }
-
         .alerts-dropdown { display: none; position: absolute; top: 70px; right: 40px; width: 320px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 100; overflow: hidden; }
         .alerts-header { padding: 16px; border-bottom: 1px solid #f1f5f9; font-weight: 800; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
         .alerts-header span { font-size: 11px; color: #ef4444; background: #fee2e2; padding: 2px 8px; border-radius: 12px; }
-        
         .alert-item { padding: 16px; border-bottom: 1px solid #f8fafc; display: flex; gap: 12px; align-items: flex-start; transition: 0.2s; cursor: pointer; }
         .alert-item:hover { background-color: #f8fafc; }
         .alert-item:last-child { border-bottom: none; }
@@ -43,10 +39,9 @@
         .alert-time { font-size: 10px; color: #94a3b8; margin-top: 6px; display: block; font-weight: 600; }
 
         .content { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
-        .section-header { display: flex; align-items: center; gap: 10px; margin: 32px 0 16px 0; }
-        .section-header:first-of-type { margin-top: 0; }
-        .section-header h2 { font-size: 16px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; }
-        .section-icon { width: 32px; height: 32px; background-color: #ff550015; color: #ff5500; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        
+        .vista-seccion { display: none; }
+        .vista-seccion.activa { display: block; }
 
         .table-card { background-color: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; text-align: left; }
@@ -77,8 +72,20 @@
     <aside class="sidebar">
         <div>
             <div class="brand">B-<span>IA</span></div>
+            <!-- Menú Lateral 100% Separado -->
             <ul class="nav-list">
-                <li class="nav-item active"><i data-lucide="wallet"></i> Cajero Interactivo</li>
+                <li class="nav-item active" onclick="cambiarPestana('recargas', this)">
+                    <i data-lucide="arrow-down-left"></i> Métodos de Recarga
+                </li>
+                <li class="nav-item" onclick="cambiarPestana('cobros', this)">
+                    <i data-lucide="arrow-up-right"></i> Cobros y Retiros
+                </li>
+                <li class="nav-item" onclick="cambiarPestana('deportes', this)">
+                    <i data-lucide="trophy"></i> Apuestas Deportivas
+                </li>
+                <li class="nav-item" onclick="cambiarPestana('flujos', this)">
+                    <i data-lucide="git-merge"></i> Flujos UX
+                </li>
             </ul>
         </div>
     </aside>
@@ -86,8 +93,8 @@
     <div class="main-container">
         <header class="top-header">
             <div class="header-title">
-                <h1>Benchmarking de Métodos de Recarga y Cobro</h1>
-                <p>Haz clic sobre cualquiera de las píldoras de pago para consultar sus rangos oficiales.</p>
+                <h1 id="titulo-pagina">Métodos de Recarga</h1>
+                <p id="subtitulo-pagina">Haz clic sobre las píldoras de pago para consultar límites y tiempos de depósito.</p>
             </div>
             
             <div class="header-actions">
@@ -100,44 +107,57 @@
                     <div class="alerts-header">
                         Alertas del Mercado <span id="contador-alertas">0 Nuevas</span>
                     </div>
-                    <!-- Las alertas se inyectarán aquí automáticamente -->
                     <div id="lista-alertas"></div>
                 </div>
             </div>
         </header>
 
         <main class="content">
-            <div class="section-header">
-                <div class="section-icon"><i data-lucide="arrow-down-left"></i></div>
-                <h2>1. Métodos de Recarga (Haz clic en un método)</h2>
-            </div>
-            <div class="table-card">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Operador</th>
-                            <th>Métodos de Recarga Disponibles (Haz clic para ver rangos)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-recargas"></tbody>
-                </table>
+            
+            <!-- VISTA 1: RECARGAS (EXCLUSIVA) -->
+            <div id="vista-recargas" class="vista-seccion activa">
+                <div class="table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Canales Disponibles (Haz clic para ver rangos)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-recargas"></tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="section-header">
-                <div class="section-icon"><i data-lucide="arrow-up-right"></i></div>
-                <h2>2. Métodos de Cobro y Retiro (Haz clic en un método)</h2>
+            <!-- VISTA 2: COBROS (EXCLUSIVA) -->
+            <div id="vista-cobros" class="vista-seccion">
+                <div class="table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operador</th>
+                                <th>Canales de Retiro Disponibles (Haz clic para ver rangos)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-cobros"></tbody>
+                    </table>
+                </div>
             </div>
-            <div class="table-card">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Operador</th>
-                            <th>Canales de Retiro Disponibles (Haz clic para ver rangos)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-cobros"></tbody>
-                </table>
+
+            <!-- VISTA 3: DEPORTES -->
+            <div id="vista-deportes" class="vista-seccion">
+                <div class="table-card" style="padding: 40px; text-align: center; color: #64748b;">
+                    <p>Aquí construiremos la tabla de límites de apuestas, ganancias máximas y Cashout.</p>
+                </div>
             </div>
+
+            <!-- VISTA 4: FLUJOS UX -->
+            <div id="vista-flujos" class="vista-seccion">
+                <div class="table-card" style="padding: 40px; text-align: center; color: #64748b;">
+                    <p>Aquí construiremos la auditoría de pasos y tiempos reales.</p>
+                </div>
+            </div>
+
         </main>
     </div>
 
@@ -156,18 +176,29 @@
     </div>
 
     <script>
-        // Lógica de la Campana
+        function cambiarPestana(seccion, elemento) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            elemento.classList.add('active');
+
+            document.querySelectorAll('.vista-seccion').forEach(el => el.classList.remove('activa'));
+            document.getElementById(`vista-${seccion}`).classList.add('activa');
+
+            const titulos = {
+                'recargas': { h1: 'Métodos de Recarga', p: 'Haz clic sobre las píldoras de pago para consultar límites y tiempos de depósito.' },
+                'cobros': { h1: 'Canales de Cobro y Retiro', p: 'Haz clic sobre las píldoras de pago para consultar límites y tiempos de retiro.' },
+                'deportes': { h1: 'Benchmarking de Apuestas Deportivas', p: 'Límites, ganancias máximas y disponibilidad de Cashout por operador.' },
+                'flujos': { h1: 'Auditoría de Flujos UX', p: 'Medición de clics y fricción en los procesos de depósito y retiro.' }
+            };
+            document.getElementById('titulo-pagina').innerText = titulos[seccion].h1;
+            document.getElementById('subtitulo-pagina').innerText = titulos[seccion].p;
+        }
+
         function toggleAlerts() {
             const menu = document.getElementById('alertsMenu');
             const puntoRojo = document.getElementById('alerta-punto');
-            
             const isVisible = menu.style.display === 'block';
             menu.style.display = isVisible ? 'none' : 'block';
-            
-            // Cuando hacen clic, desaparece el punto rojo (simulando que ya se leyeron)
-            if (!isVisible) {
-                puntoRojo.style.display = 'none';
-            }
+            if (!isVisible) puntoRojo.style.display = 'none';
         }
 
         window.onclick = function(event) {
@@ -180,61 +211,33 @@
             const res = await fetch('datos.json?v=' + new Date().getTime());
             const data = await res.json();
 
-            // 1. Cargar Alertas Dinámicamente
             if (data.alertas && data.alertas.length > 0) {
-                document.getElementById('alerta-punto').style.display = 'block'; // Encender punto rojo
+                document.getElementById('alerta-punto').style.display = 'block';
                 document.getElementById('contador-alertas').innerText = `${data.alertas.length} Nuevas`;
                 
-                const listaAlertas = document.getElementById('lista-alertas');
-                listaAlertas.innerHTML = data.alertas.map(alerta => {
-                    // Configurar diseño según el tipo de alerta
-                    let bg, color, icon;
-                    if (alerta.tipo === 'caida') { bg = '#fee2e2'; color = '#ef4444'; icon = 'alert-triangle'; }
-                    else if (alerta.tipo === 'cambio') { bg = '#fef3c7'; color = '#b45309'; icon = 'trending-up'; }
-                    else { bg = '#dcfce7'; color = '#15803d'; icon = 'check-circle'; }
-
+                document.getElementById('lista-alertas').innerHTML = data.alertas.map(alerta => {
+                    let bg = alerta.tipo === 'caida' ? '#fee2e2' : alerta.tipo === 'cambio' ? '#fef3c7' : '#dcfce7';
+                    let color = alerta.tipo === 'caida' ? '#ef4444' : alerta.tipo === 'cambio' ? '#b45309' : '#15803d';
+                    let icon = alerta.tipo === 'caida' ? 'alert-triangle' : alerta.tipo === 'cambio' ? 'trending-up' : 'check-circle';
                     return `
                     <div class="alert-item">
                         <div class="alert-icon" style="background:${bg}; color:${color};"><i data-lucide="${icon}" style="width:16px;"></i></div>
-                        <div class="alert-content">
-                            <h4>${alerta.titulo}</h4>
-                            <p>${alerta.mensaje}</p>
-                            <span class="alert-time">${alerta.tiempo}</span>
-                        </div>
-                    </div>
-                    `;
+                        <div class="alert-content"><h4>${alerta.titulo}</h4><p>${alerta.mensaje}</p><span class="alert-time">${alerta.tiempo}</span></div>
+                    </div>`;
                 }).join('');
             }
 
-            // 2. Cargar Recargas
-            const tbodyRecargas = document.getElementById('tabla-recargas');
-            tbodyRecargas.innerHTML = data.productos.recargas.map(c => `
+            document.getElementById('tabla-recargas').innerHTML = data.productos.recargas.map(c => `
                 <tr>
                     <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${c.color}">${c.codigo}</div>${c.casa}</div></td>
-                    <td>
-                        ${c.metodos.map(m => `
-                            <button class="pill-btn" onclick='verDetalle("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>
-                                ${m.nombre} <i data-lucide="info" style="width:12px;height:12px;"></i>
-                            </button>
-                        `).join('')}
-                    </td>
-                </tr>
-            `).join('');
+                    <td>${c.metodos.map(m => `<button class="pill-btn" onclick='verDetalle("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>${m.nombre} <i data-lucide="info" style="width:12px;height:12px;"></i></button>`).join('')}</td>
+                </tr>`).join('');
 
-            // 3. Cargar Cobros
-            const tbodyCobros = document.getElementById('tabla-cobros');
-            tbodyCobros.innerHTML = data.productos.cobros.map(c => `
+            document.getElementById('tabla-cobros').innerHTML = data.productos.cobros.map(c => `
                 <tr>
                     <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${c.color}">${c.codigo}</div>${c.casa}</div></td>
-                    <td>
-                        ${c.metodos.map(m => `
-                            <button class="pill-btn" onclick='verDetalle("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>
-                                ${m.nombre} <i data-lucide="info" style="width:12px;height:12px;"></i>
-                            </button>
-                        `).join('')}
-                    </td>
-                </tr>
-            `).join('');
+                    <td>${c.metodos.map(m => `<button class="pill-btn" onclick='verDetalle("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>${m.nombre} <i data-lucide="info" style="width:12px;height:12px;"></i></button>`).join('')}</td>
+                </tr>`).join('');
 
             lucide.createIcons();
         }
@@ -248,9 +251,7 @@
             document.getElementById('modal').style.display = 'flex';
         }
 
-        function cerrarModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
+        function cerrarModal() { document.getElementById('modal').style.display = 'none'; }
 
         cargarDatos();
     </script>
