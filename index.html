@@ -1,269 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B-IA | Panel Ejecutivo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #f8fafc; color: #0f172a; display: flex; min-height: 100vh; }
-        
-        .sidebar { width: 260px; background-color: #0f172a; color: #ffffff; display: flex; flex-direction: column; justify-content: space-between; padding: 28px 0; flex-shrink: 0; }
-        .brand { padding: 0 28px; font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 36px; }
-        .brand span { color: #ff5500; }
-        .nav-list { list-style: none; display: flex; flex-direction: column; gap: 6px; padding: 0 16px; }
-        .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; color: #94a3b8; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.2s; }
-        .nav-item.active, .nav-item:hover { background-color: #ff5500; color: #ffffff; }
-
-        .main-container { flex-grow: 1; display: flex; flex-direction: column; }
-        
-        .top-header { background-color: #ffffff; padding: 20px 40px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; position: relative; }
-        .header-title h1 { font-size: 22px; font-weight: 800; color: #0f172a; }
-        .header-title p { font-size: 13px; color: #64748b; margin-top: 2px; }
-        
-        .header-actions { display: flex; align-items: center; gap: 20px; }
-        .notification-bell { position: relative; cursor: pointer; color: #475569; padding: 8px; border-radius: 50%; transition: 0.2s; }
-        .notification-bell:hover { background-color: #f1f5f9; color: #0f172a; }
-        .bell-badge { position: absolute; top: 4px; right: 4px; width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; border: 2px solid #ffffff; display: none; }
-        .alerts-dropdown { display: none; position: absolute; top: 70px; right: 40px; width: 320px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 100; overflow: hidden; }
-        .alerts-header { padding: 16px; border-bottom: 1px solid #f1f5f9; font-weight: 800; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
-        .alerts-header span { font-size: 11px; color: #ef4444; background: #fee2e2; padding: 2px 8px; border-radius: 12px; }
-        .alert-item { padding: 16px; border-bottom: 1px solid #f8fafc; display: flex; gap: 12px; align-items: flex-start; transition: 0.2s; cursor: pointer; }
-        .alert-item:hover { background-color: #f8fafc; }
-        
-        .content { padding: 40px; max-width: 1400px; margin: 0 auto; width: 100%; }
-        .vista-seccion { display: none; }
-        .vista-seccion.activa { display: block; }
-
-        .table-card { background-color: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { background-color: #f8fafc; padding: 14px 20px; font-size: 11px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; }
-        td { padding: 16px 20px; border-bottom: 1px solid #f1f5f9; font-size: 13px; vertical-align: middle; }
-        
-        .brand-cell { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #0f172a; }
-        .brand-icon { width: 32px; height: 32px; border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; }
-        
-        .pill-btn { 
-            background-color: #f1f5f9; color: #0f172a; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; margin-right: 6px; margin-bottom: 6px;
-            border: 1px solid #cbd5e1; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.2s;
-        }
-        .pill-btn:hover { background-color: #ff5500; color: #ffffff; border-color: #ff5500; transform: translateY(-1px); }
-        .time-tag { font-size: 10px; color: #16a34a; font-weight: 800; background: #dcfce7; padding: 2px 6px; border-radius: 4px; }
-        .pill-btn:hover .time-tag { background: #ffffff; color: #ff5500; }
-
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-card { background: white; border-radius: 16px; padding: 28px; width: 420px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); position: relative; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        .modal-title { font-size: 18px; font-weight: 800; color: #0f172a; }
-        .close-btn { cursor: pointer; color: #64748b; border: none; background: none; font-size: 20px; }
-        .detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f8fafc; font-size: 14px; }
-        .detail-label { color: #64748b; font-weight: 500; }
-        .detail-val { font-weight: 700; color: #0f172a; }
-        
-        .badge { padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; background: #f1f5f9; color: #475569; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar IA - B-IA Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <aside class="sidebar">
-        <div>
-            <div class="brand">B-<span>IA</span></div>
-            <ul class="nav-list">
-                <li class="nav-item active" onclick="cambiarPestana('recargas', this)"><i data-lucide="arrow-down-left"></i> Métodos de Recarga</li>
-                <li class="nav-item" onclick="cambiarPestana('cobros', this)"><i data-lucide="arrow-up-right"></i> Cobros y Retiros</li>
-                <li class="nav-item" onclick="cambiarPestana('deportes', this)"><i data-lucide="trophy"></i> Apuestas Deportivas</li>
-                <li class="nav-item" onclick="cambiarPestana('flujos', this)"><i data-lucide="git-merge"></i> Flujos UX</li>
-            </ul>
-        </div>
+<body class="bg-gray-100 font-sans antialiased text-gray-800">
+
+  <div class="flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-slate-900 text-white flex flex-col shrink-0">
+      <div class="p-6 text-2xl font-black tracking-wider border-b border-slate-800 flex items-center gap-2">
+        <span>B-</span><span class="text-orange-500">IA</span>
+      </div>
+      <nav class="flex-1 p-4 space-y-2 font-semibold">
+        <a href="#" class="flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition">
+          <i class="fa-solid font-bold fa-wallet"></i> Métodos de Recarga
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-xl transition">
+          <i class="fa-solid fa-hand-holding-dollar"></i> Cobros y Retiros
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-xl transition">
+          <i class="fa-solid fa-trophy"></i> Apuestas Deportivas
+        </a>
+        <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 hover:text-white rounded-xl transition">
+          <i class="fa-solid fa-sliders"></i> Flujos UX
+        </a>
+      </nav>
     </aside>
 
-    <div class="main-container">
-        <header class="top-header">
-            <div class="header-title">
-                <h1 id="titulo-pagina">Métodos de Recarga</h1>
-                <p id="subtitulo-pagina">Consulta los canales disponibles y sus tiempos estimados de acreditación.</p>
-            </div>
-            
-            <div class="header-actions">
-                <div class="notification-bell" onclick="toggleAlerts()">
-                    <i data-lucide="bell"></i>
-                    <div class="bell-badge" id="alerta-punto"></div>
-                </div>
-                <div class="alerts-dropdown" id="alertsMenu">
-                    <div class="alerts-header">Alertas del Mercado <span id="contador-alertas">0 Nuevas</span></div>
-                    <div id="lista-alertas"></div>
-                </div>
-            </div>
-        </header>
-
-        <main class="content">
-            
-            <div id="vista-recargas" class="vista-seccion activa">
-                <div class="table-card">
-                    <table>
-                        <thead><tr><th>Operador</th><th>Canales y Tiempos de Recarga (Haz clic para ver límites)</th></tr></thead>
-                        <tbody id="tabla-recargas"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="vista-cobros" class="vista-seccion">
-                <div class="table-card">
-                    <table>
-                        <thead><tr><th>Operador</th><th>Canales y Tiempos de Retiro (Haz clic para ver límites)</th></tr></thead>
-                        <tbody id="tabla-cobros"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="vista-deportes" class="vista-seccion">
-                <div class="table-card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Operador</th>
-                                <th>Apuesta Mínima</th>
-                                <th>Apuesta Máxima</th>
-                                <th>Ganancia Máxima</th>
-                                <th>Tipo de Cashout</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-deportes"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="vista-flujos" class="vista-seccion">
-                <div class="table-card">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Operador</th>
-                                <th>Auditoría de Pasos y Acreditación (Haz clic en el método)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-flujos"></tbody>
-                    </table>
-                </div>
-            </div>
-
-        </main>
-    </div>
-
-    <!-- Modal Dinámico -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-title" id="m-titulo">Detalle</div>
-                <button class="close-btn" onclick="cerrarModal()">✕</button>
-            </div>
-            <div class="detail-row"><span class="detail-label">Operador:</span><span class="detail-val" id="m-casa">--</span></div>
-            <div class="detail-row"><span class="detail-label" id="label-1">Dato 1:</span><span class="detail-val" style="color:#16a34a;" id="val-1">--</span></div>
-            <div class="detail-row"><span class="detail-label" id="label-2">Dato 2:</span><span class="detail-val" id="val-2">--</span></div>
-            <div class="detail-row" style="border-bottom:none;"><span class="detail-label" id="label-3">Dato 3:</span><span class="detail-val" id="val-3">--</span></div>
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
+      <header class="mb-6 flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl font-bold text-slate-900">Métodos de Recarga</h1>
+          <p class="text-slate-500 text-sm mt-1">Consulta los canales disponibles y sus tiempos estimados de acreditación.</p>
         </div>
-    </div>
+        <div id="fecha-actualizacion" class="text-xs font-semibold px-4 py-2 bg-slate-200 text-slate-700 rounded-full shadow-sm">
+          Cargando estado...
+        </div>
+      </header>
 
-    <script>
-        function cambiarPestana(seccion, elemento) {
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            elemento.classList.add('active');
-            document.querySelectorAll('.vista-seccion').forEach(el => el.classList.remove('activa'));
-            document.getElementById(`vista-${seccion}`).classList.add('activa');
+      <!-- Tabla Principal -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="grid grid-cols-12 bg-slate-100 p-4 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-wider">
+          <div class="col-span-3">Operador</div>
+          <div class="col-span-9">Canales y Tiempos de Recarga</div>
+        </div>
 
-            const titulos = {
-                'recargas': { h1: 'Métodos de Recarga', p: 'Consulta los canales disponibles y sus tiempos estimados de acreditación.' },
-                'cobros': { h1: 'Canales de Cobro y Retiro', p: 'Consulta los canales de salida y sus tiempos de acreditación bancaria.' },
-                'deportes': { h1: 'Límites de Apuestas Deportivas', p: 'Apuestas mínimas, ganancias máximas y Cashout.' },
-                'flujos': { h1: 'Auditoría de Flujos UX', p: 'Medición de clics, pasos y tiempos reales de acreditación.' }
-            };
-            document.getElementById('titulo-pagina').innerText = titulos[seccion].h1;
-            document.getElementById('subtitulo-pagina').innerText = titulos[seccion].p;
+        <div id="contenedor-operadores" class="divide-y divide-slate-100">
+          <div class="p-8 text-center text-slate-400">Cargando datos del bot...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    async function cargarDatos() {
+      try {
+        const respuesta = await fetch('datos.json?v=' + new Date().getTime());
+        const data = await respuesta.json();
+
+        // Actualizar hora
+        if(data.ultima_actualizacion) {
+          document.getElementById('fecha-actualizacion').innerText = data.ultima_actualizacion;
         }
 
-        function toggleAlerts() {
-            const menu = document.getElementById('alertsMenu');
-            const pRojo = document.getElementById('alerta-punto');
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-            if (menu.style.display === 'block') pRojo.style.display = 'none';
+        const contenedor = document.getElementById('contenedor-operadores');
+        contenedor.innerHTML = '';
+
+        if (!data.operadores || data.operadores.length === 0) {
+          contenedor.innerHTML = '<div class="p-8 text-center text-slate-400">No hay información disponible.</div>';
+          return;
         }
 
-        async function cargarDatos() {
-            const res = await fetch('datos.json?v=' + new Date().getTime());
-            const data = await res.json();
+        data.operadores.forEach(op => {
+          let recargasHtml = '';
+          
+          if(op.recargas && op.recargas.length > 0) {
+            recargasHtml = op.recargas.map(r => `
+              <div class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 transition cursor-pointer" title="Límites: ${r.min_recarga || 'S/ 10'} a ${r.max_recarga || 'S/ 5,000'}">
+                <span>${r.canal}</span>
+                <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-1.5 py-0.5 rounded-md">${r.tiempo}</span>
+              </div>
+            `).join('');
+          } else {
+            recargasHtml = '<span class="text-xs text-slate-400 italic">Sin datos de recarga</span>';
+          }
 
-            if (data.alertas && data.alertas.length > 0) {
-                document.getElementById('alerta-punto').style.display = 'block';
-                document.getElementById('contador-alertas').innerText = `${data.alertas.length} Nuevas`;
-            }
+          const fila = `
+            <div class="grid grid-cols-12 p-4 items-center hover:bg-slate-50/80 transition">
+              <div class="col-span-3 flex items-center gap-3 font-bold text-slate-800">
+                <div class="w-8 h-8 bg-slate-900 text-white flex items-center justify-center rounded-lg text-xs font-black">${op.logo || op.nombre.substring(0,2)}</div>
+                <span>${op.nombre}</span>
+              </div>
+              <div class="col-span-9 flex flex-wrap gap-2">
+                ${recargasHtml}
+              </div>
+            </div>
+          `;
+          contenedor.innerHTML += fila;
+        });
 
-            // 1. Recargas (Ahora incluye la etiqueta visual de tiempo)
-            document.getElementById('tabla-recargas').innerHTML = data.productos.recargas.map(c => `
-                <tr>
-                    <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${c.color}">${c.codigo}</div>${c.casa}</div></td>
-                    <td>${c.metodos.map(m => `
-                        <button class="pill-btn" onclick='verModalCajero("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>
-                            ${m.nombre} <span class="time-tag">${m.tiempo}</span> <i data-lucide="info" style="width:12px;"></i>
-                        </button>`).join('')}
-                    </td>
-                </tr>`).join('');
+      } catch (error) {
+        console.error("Error al cargar JSON:", error);
+        document.getElementById('contenedor-operadores').innerHTML = `
+          <div class="p-8 text-center text-red-500 font-semibold">
+            ❌ Error al cargar los datos. Verifica que el archivo datos.json esté subido correctamente.
+          </div>
+        `;
+      }
+    }
 
-            // 2. Cobros (Ahora incluye la etiqueta visual de tiempo)
-            document.getElementById('tabla-cobros').innerHTML = data.productos.cobros.map(c => `
-                <tr>
-                    <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${c.color}">${c.codigo}</div>${c.casa}</div></td>
-                    <td>${c.metodos.map(m => `
-                        <button class="pill-btn" onclick='verModalCajero("${c.casa}", "${m.nombre}", "${m.min}", "${m.max}", "${m.tiempo}")'>
-                            ${m.nombre} <span class="time-tag">${m.tiempo}</span> <i data-lucide="info" style="width:12px;"></i>
-                        </button>`).join('')}
-                    </td>
-                </tr>`).join('');
-
-            // 3. Deportes
-            document.getElementById('tabla-deportes').innerHTML = data.productos.deportes.map(d => `
-                <tr>
-                    <td><div class="brand-cell"><div class="brand-icon" style="background:${d.color}">${d.codigo}</div>${d.casa}</div></td>
-                    <td><b>${d.apuesta_min}</b></td>
-                    <td>${d.apuesta_max}</td>
-                    <td>${d.ganancia_max}</td>
-                    <td><span class="badge">${d.cashout}</span></td>
-                </tr>`).join('');
-
-            // 4. Flujos UX
-            document.getElementById('tabla-flujos').innerHTML = data.productos.flujos.map(f => `
-                <tr>
-                    <td style="width: 30%;"><div class="brand-cell"><div class="brand-icon" style="background:${f.color}">${f.codigo}</div>${f.casa}</div></td>
-                    <td>${f.metodos.map(m => `
-                        <button class="pill-btn" onclick='verModalFlujo("${f.casa}", "${m.nombre}", "${m.clics}", "${m.acreditacion}", "${m.pasos}")'>
-                            ${m.nombre} <span class="time-tag">${m.acreditacion}</span> <i data-lucide="info" style="width:12px;"></i>
-                        </button>`).join('')}
-                    </td>
-                </tr>`).join('');
-
-            lucide.createIcons();
-        }
-
-        function verModalCajero(casa, nombre, min, max, tiempo) {
-            document.getElementById('m-titulo').innerText = nombre;
-            document.getElementById('m-casa').innerText = casa;
-            document.getElementById('label-1').innerText = "Monto Mínimo:"; document.getElementById('val-1').innerText = min;
-            document.getElementById('label-2').innerText = "Monto Máximo:"; document.getElementById('val-2').innerText = max;
-            document.getElementById('label-3').innerText = "Tiempo Estimado:"; document.getElementById('val-3').innerText = tiempo;
-            document.getElementById('modal').style.display = 'flex';
-        }
-
-        function verModalFlujo(casa, nombre, clics, tiempo, pasos) {
-            document.getElementById('m-titulo').innerText = "Auditoría: " + nombre;
-            document.getElementById('m-casa').innerText = casa;
-            document.getElementById('label-1').innerText = "Acreditación Real:"; document.getElementById('val-1').innerText = tiempo;
-            document.getElementById('label-2').innerText = "Fricción:"; document.getElementById('val-2').innerText = clics;
-            document.getElementById('label-3').innerText = "Pasos del Usuario:"; document.getElementById('val-3').innerText = pasos;
-            document.getElementById('modal').style.display = 'flex';
-        }
-
-        function cerrarModal() { document.getElementById('modal').style.display = 'none'; }
-        cargarDatos();
-    </script>
+    // Ejecutar al cargar
+    cargarDatos();
+  </script>
 </body>
 </html>
