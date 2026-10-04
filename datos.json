@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última verificación en vivo: 04/10/2026 a las 04:36",
+  "ultima_actualizacion": "Última verificación en vivo: 04/10/2026 a las 11:00",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -198,6 +198,13 @@
         {
           "canal": "PagoEfectivo",
           "tiempo": "< 5 mins",
+          "estado": "Operativo",
+          "min_recarga": "S/ 10",
+          "max_recarga": "S/ 5,000"
+        },
+        {
+          "canal": "Visa / Mastercard",
+          "tiempo": "Inmediato",
           "estado": "Operativo",
           "min_recarga": "S/ 10",
           "max_recarga": "S/ 5,000"
