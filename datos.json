@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última verificación en vivo: 05/10/2026 a las 05:20",
+  "ultima_actualizacion": "Última verificación en vivo: 05/10/2026 a las 06:16",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -189,7 +189,35 @@
       "logo": "AT",
       "recargas": [
         {
-          "canal": "Banca por Internet BCP",
+          "canal": "Yape",
+          "tiempo": "Inmediato",
+          "estado": "Operativo",
+          "min_recarga": "S/ 10",
+          "max_recarga": "S/ 5,000"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "< 5 mins",
+          "estado": "Operativo",
+          "min_recarga": "S/ 10",
+          "max_recarga": "S/ 5,000"
+        },
+        {
+          "canal": "Visa / Mastercard",
+          "tiempo": "Inmediato",
+          "estado": "Operativo",
+          "min_recarga": "S/ 10",
+          "max_recarga": "S/ 5,000"
+        },
+        {
+          "canal": "SafetyPay",
+          "tiempo": "Inmediato",
+          "estado": "Operativo",
+          "min_recarga": "S/ 10",
+          "max_recarga": "S/ 5,000"
+        },
+        {
+          "canal": "Pago en Tienda / Red de Puntos",
           "tiempo": "Inmediato",
           "estado": "Operativo",
           "min_recarga": "S/ 10",
