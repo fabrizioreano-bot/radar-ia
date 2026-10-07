@@ -3,28 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B-IA | Radar de Métodos y Límites</title>
+  <title>B-IA | Radar de Métodos, Límites y Retiros</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen">
 
   <div class="flex h-screen overflow-hidden">
-    <!-- Sidebar -->
+    <!-- Sidebar Navegación -->
     <aside class="w-64 bg-slate-900 text-white flex flex-col shrink-0 border-r border-slate-800">
       <div class="p-6 text-2xl font-black tracking-wider border-b border-slate-800 flex items-center gap-2">
         <span>B-</span><span class="text-orange-500">IA</span>
       </div>
       <nav class="flex-1 p-4 space-y-2 font-semibold">
-        <a href="#" class="flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg">
+        <button id="nav-recargas" onclick="cambiarPestana('recargas')" class="w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition">
           <i class="fa-solid fa-wallet"></i> Métodos de Recarga
-        </a>
-        <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
+        </button>
+        <button id="nav-retiros" onclick="cambiarPestana('retiros')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
           <i class="fa-solid fa-hand-holding-dollar"></i> Cobros y Retiros
-        </a>
-        <a href="#" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
-          <i class="fa-solid fa-chart-pie"></i> Análisis Visa
-        </a>
+        </button>
       </nav>
     </aside>
 
@@ -34,10 +31,10 @@
       <!-- Top Bar -->
       <header class="mb-8 flex flex-wrap justify-between items-center gap-4">
         <div>
-          <h1 class="text-3xl font-extrabold text-white flex items-center gap-3">
+          <h1 id="titulo-seccion" class="text-3xl font-extrabold text-white flex items-center gap-3">
             <i class="fa-solid fa-bolt text-orange-500"></i> Radar de Métodos & Límites Operativos
           </h1>
-          <p class="text-slate-400 text-sm mt-1">Vista dinámica con los 3 canales principales por marca. Haz clic para expandir.</p>
+          <p id="subtitulo-seccion" class="text-slate-400 text-sm mt-1">Vista dinámica con los métodos principales por marca. Haz clic para expandir.</p>
         </div>
 
         <div class="flex items-center gap-3">
@@ -47,18 +44,18 @@
         </div>
       </header>
 
-      <!-- Métricas del Filtro Visa -->
+      <!-- Métricas -->
       <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
           <div class="text-slate-400 text-xs font-bold uppercase mb-1">Operadores Activos</div>
           <div id="total-casas" class="text-3xl font-black text-white">0</div>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-          <div class="text-slate-400 text-xs font-bold uppercase mb-1">Canales Aceptan Visa</div>
+          <div id="label-metric-2" class="text-slate-400 text-xs font-bold uppercase mb-1">Canales Aceptan Visa</div>
           <div id="total-visa" class="text-3xl font-black text-blue-400">0</div>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-          <div class="text-slate-400 text-xs font-bold uppercase mb-1">Rango Mínimo Visa Promedio</div>
+          <div id="label-metric-3" class="text-slate-400 text-xs font-bold uppercase mb-1">Rango Mínimo Visa Promedio</div>
           <div id="promedio-visa" class="text-3xl font-black text-emerald-400">S/ 0.00</div>
         </div>
       </section>
@@ -77,107 +74,145 @@
       <button onclick="cerrarModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold p-2">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      
-      <div id="modal-header" class="mb-4">
-        <!-- Renderizado de Cabecera del Modal -->
-      </div>
-
-      <div id="modal-body" class="space-y-3 overflow-y-auto pr-2 flex-1">
-        <!-- Renderizado de Lista Completa de Métodos -->
-      </div>
+      <div id="modal-header" class="mb-4"></div>
+      <div id="modal-body" class="space-y-3 overflow-y-auto pr-2 flex-1"></div>
     </div>
   </div>
 
   <script>
     let globalData = null;
+    let pestanaActual = 'recargas';
 
     async function cargarDatos() {
       try {
         const res = await fetch('datos.json?v=' + new Date().getTime());
         globalData = await res.json();
-
-        const contenedor = document.getElementById('contenedor-tarjetas');
-        contenedor.innerHTML = '';
-
-        let countVisa = 0;
-        let sumaMinVisa = 0;
-
-        document.getElementById('total-casas').innerText = `${globalData.operadores.length} Casas`;
-
-        globalData.operadores.forEach((op, index) => {
-          const recargasSugeridas = op.recargas.slice(0, 3);
-          const cantidadRestante = op.recargas.length - 3;
-
-          let recargasHtml = recargasSugeridas.map(r => {
-            if (r.visa) {
-              countVisa++;
-              let minNum = parseFloat(r.min_recarga.replace(/[^\d.]/g, '')) || 0;
-              sumaMinVisa += minNum;
-            }
-
-            return `
-              <div class="p-3 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/60'} rounded-xl">
-                <div class="flex justify-between items-center mb-1">
-                  <span class="text-xs font-bold text-white flex items-center gap-1.5">
-                    ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-sm"></i>' : '<i class="fa-solid fa-credit-card text-slate-500 text-xs"></i>'}
-                    ${r.canal}
-                  </span>
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">
-                    ${r.tiempo}
-                  </span>
-                </div>
-                <div class="flex justify-between text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-800/80">
-                  <span>Límite Mín: <strong class="text-slate-200">${r.min_recarga}</strong></span>
-                  <span>Límite Máx: <strong class="text-slate-200">${r.max_recarga}</strong></span>
-                </div>
-              </div>
-            `;
-          }).join('');
-
-          const botonVerMas = cantidadRestante > 0 
-            ? `<button onclick="abrirModal(${index})" class="w-full py-2.5 mt-2 bg-slate-800 hover:bg-slate-700 text-orange-400 hover:text-orange-300 font-bold text-xs rounded-xl border border-slate-700/80 transition flex items-center justify-center gap-2">
-                <span>Ver todos los métodos (+${cantidadRestante})</span>
-                <i class="fa-solid fa-chevron-right text-[10px]"></i>
-               </button>`
-            : '';
-
-          const card = `
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
-              <div>
-                <div class="p-4 bg-gradient-to-r ${op.color} flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white/90 p-1 flex items-center justify-center rounded-xl shadow-md border border-white/20">
-                      <img src="${op.logoUrl}" alt="${op.nombre}" class="max-h-7 max-w-7 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                      <span class="hidden font-black text-slate-900 text-xs">${op.logoText}</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-white tracking-wide">${op.nombre}</h3>
-                  </div>
-                  <span class="text-xs font-bold bg-black/40 px-2.5 py-1 rounded-lg text-slate-200">
-                    ${op.recargas.length} Métodos
-                  </span>
-                </div>
-                <div class="p-4 space-y-2.5">
-                  ${recargasHtml}
-                </div>
-              </div>
-              <div class="px-4 pb-4">
-                ${botonVerMas}
-              </div>
-            </div>
-          `;
-          contenedor.innerHTML += card;
-        });
-
-        document.getElementById('total-visa').innerText = `${countVisa} Pasarelas`;
-        document.getElementById('promedio-visa').innerText = countVisa > 0 ? `S/ ${(sumaMinVisa / countVisa).toFixed(2)}` : 'S/ 0.00';
-
+        renderizarPestana();
       } catch (e) {
         console.error("Error al cargar datos:", e);
       }
     }
 
+    function cambiarPestana(pestana) {
+      pestanaActual = pestana;
+      
+      const navRecargas = document.getElementById('nav-recargas');
+      const navRetiros = document.getElementById('nav-retiros');
+
+      if (pestana === 'recargas') {
+        navRecargas.className = "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition";
+        navRetiros.className = "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
+        document.getElementById('titulo-seccion').innerHTML = '<i class="fa-solid fa-bolt text-orange-500"></i> Radar de Métodos & Límites Operativos';
+        document.getElementById('subtitulo-seccion').innerText = "Vista dinámica con los métodos principales por marca. Haz clic para expandir.";
+      } else {
+        navRetiros.className = "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition";
+        navRecargas.className = "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
+        document.getElementById('titulo-seccion').innerHTML = '<i class="fa-solid fa-hand-holding-dollar text-orange-500"></i> Cobros y Retiros de Ganancias';
+        document.getElementById('subtitulo-seccion').innerText = "Monitoreo de tiempos de pago, canales de retiro y montos máximos permitidos.";
+      }
+
+      renderizarPestana();
+    }
+
+    function renderizarPestana() {
+      if (!globalData || !globalData.operadores) return;
+
+      const contenedor = document.getElementById('contenedor-tarjetas');
+      contenedor.innerHTML = '';
+
+      let countVisa = 0;
+      let sumaMinVisa = 0;
+
+      document.getElementById('total-casas').innerText = `${globalData.operadores.length} Casas`;
+
+      globalData.operadores.forEach((op, index) => {
+        const listaMetodos = pestanaActual === 'recargas' ? (op.recargas || []) : (op.retiros || []);
+        const recargasSugeridas = listaMetodos.slice(0, 3);
+        const cantidadRestante = listaMetodos.length - 3;
+
+        let recargasHtml = recargasSugeridas.map(r => {
+          if (pestanaActual === 'recargas' && r.visa) {
+            countVisa++;
+            let minNum = parseFloat(r.min_recarga.replace(/[^\d.]/g, '')) || 0;
+            sumaMinVisa += minNum;
+          }
+
+          const minLabel = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
+          const maxLabel = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
+
+          return `
+            <div class="p-3 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/60'} rounded-xl">
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                  ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-sm"></i>' : '<i class="fa-solid fa-credit-card text-slate-500 text-xs"></i>'}
+                  ${r.canal}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">
+                  ${r.tiempo}
+                </span>
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-800/80">
+                <span>Mín: <strong class="text-slate-200">${minLabel}</strong></span>
+                <span>Máx: <strong class="text-slate-200">${maxLabel}</strong></span>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        if (recargasHtml === '') {
+          recargasHtml = '<div class="text-xs text-slate-500 italic py-4 text-center">Sin información de retiros</div>';
+        }
+
+        const botonVerMas = cantidadRestante > 0 
+          ? `<button onclick="abrirModal(${index})" class="w-full py-2.5 mt-2 bg-slate-800 hover:bg-slate-700 text-orange-400 hover:text-orange-300 font-bold text-xs rounded-xl border border-slate-700/80 transition flex items-center justify-center gap-2">
+              <span>Ver todos (+${cantidadRestante})</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+             </button>`
+          : '';
+
+        const card = `
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
+            <div>
+              <div class="p-4 bg-gradient-to-r ${op.color} flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-white/90 p-1 flex items-center justify-center rounded-xl shadow-md border border-white/20">
+                    <img src="${op.logoUrl}" alt="${op.nombre}" class="max-h-7 max-w-7 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <span class="hidden font-black text-slate-900 text-xs">${op.logoText}</span>
+                  </div>
+                  <h3 class="text-lg font-bold text-white tracking-wide">${op.nombre}</h3>
+                </div>
+                <span class="text-xs font-bold bg-black/40 px-2.5 py-1 rounded-lg text-slate-200">
+                  ${listaMetodos.length} Opciones
+                </span>
+              </div>
+              <div class="p-4 space-y-2.5">
+                ${recargasHtml}
+              </div>
+            </div>
+            <div class="px-4 pb-4">
+              ${botonVerMas}
+            </div>
+          </div>
+        `;
+        contenedor.innerHTML += card;
+      });
+
+      if (pestanaActual === 'recargas') {
+        document.getElementById('label-metric-2').innerText = "Canales Aceptan Visa";
+        document.getElementById('total-visa').innerText = `${countVisa} Pasarelas`;
+        document.getElementById('label-metric-3').innerText = "Rango Mínimo Visa Promedio";
+        document.getElementById('promedio-visa').innerText = countVisa > 0 ? `S/ ${(sumaMinVisa / countVisa).toFixed(2)}` : 'S/ 0.00';
+      } else {
+        document.getElementById('label-metric-2').innerText = "Modo de Salida";
+        document.getElementById('total-visa').innerText = "Transferencias & Efectivo";
+        document.getElementById('label-metric-3').innerText = "Tiempo Promedio Retiro";
+        document.getElementById('promedio-visa').innerText = "24 Horas";
+      }
+    }
+
     function abrirModal(index) {
       const op = globalData.operadores[index];
+      const listaMetodos = pestanaActual === 'recargas' ? op.recargas : op.retiros;
       const modalHeader = document.getElementById('modal-header');
       const modalBody = document.getElementById('modal-body');
 
@@ -189,28 +224,33 @@
           </div>
           <div>
             <h2 class="text-2xl font-bold text-white">${op.nombre}</h2>
-            <p class="text-xs text-slate-400">Catálogo completo de ${op.recargas.length} métodos de recarga y sus límites</p>
+            <p class="text-xs text-slate-400">Lista completa de ${pestanaActual === 'recargas' ? 'recargas' : 'retiros'} (${listaMetodos.length} canales)</p>
           </div>
         </div>
       `;
 
-      modalBody.innerHTML = op.recargas.map(r => `
-        <div class="p-4 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/80'} rounded-xl">
-          <div class="flex justify-between items-center mb-2">
-            <span class="text-sm font-bold text-white flex items-center gap-2">
-              ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-lg"></i>' : '<i class="fa-solid fa-wallet text-slate-400"></i>'}
-              ${r.canal}
-            </span>
-            <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              ${r.tiempo}
-            </span>
+      modalBody.innerHTML = listaMetodos.map(r => {
+        const minLabel = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
+        const maxLabel = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
+
+        return `
+          <div class="p-4 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/80'} rounded-xl">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm font-bold text-white flex items-center gap-2">
+                ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-lg"></i>' : '<i class="fa-solid fa-wallet text-slate-400"></i>'}
+                ${r.canal}
+              </span>
+              <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                ${r.tiempo}
+              </span>
+            </div>
+            <div class="grid grid-cols-2 gap-4 text-xs text-slate-300 pt-2 border-t border-slate-800">
+              <div>Límite Mínimo: <strong class="text-white text-sm block mt-0.5">${minLabel}</strong></div>
+              <div>Límite Máximo: <strong class="text-white text-sm block mt-0.5">${maxLabel}</strong></div>
+            </div>
           </div>
-          <div class="grid grid-cols-2 gap-4 text-xs text-slate-300 pt-2 border-t border-slate-800">
-            <div>Límite Mínimo: <strong class="text-white text-sm block mt-0.5">${r.min_recarga}</strong></div>
-            <div>Límite Máximo: <strong class="text-white text-sm block mt-0.5">${r.max_recarga}</strong></div>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
 
       document.getElementById('modal-detalle').classList.remove('hidden');
     }
@@ -220,21 +260,26 @@
     }
 
     function descargarReporteVisa() {
-      let csv = 'MARCA_OPERADOR,METODO_RECARGA,LIMITE_MINIMO,LIMITE_MAXIMO,TIEMPO_ACREDITACION,SOPORTA_VISA\n';
+      let csv = 'MARCA_OPERADOR,METODO,LIMITE_MINIMO,LIMITE_MAXIMO,TIEMPO,VISA\n';
 
       globalData.operadores.forEach(op => {
-        op.recargas.forEach(r => {
-          if (r.visa) {
-            csv += `"${op.nombre}","${r.canal}","${r.min_recarga}","${r.max_recarga}","${r.tiempo}","SI"\n`;
-          }
-        });
+        const lista = pestanaActual === 'recargas' ? op.recargas : op.retiros;
+        if (lista) {
+          lista.forEach(r => {
+            if (pestanaActual === 'retiros' || r.visa) {
+              const minVal = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
+              const maxVal = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
+              csv += `"${op.nombre}","${r.canal}","${minVal}","${maxVal}","${r.tiempo}","${r.visa ? 'SI' : 'NO'}"\n`;
+            }
+          });
+        }
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Analisis_Limites_Visa_${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `Analisis_${pestanaActual.toUpperCase()}_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
     }
 
