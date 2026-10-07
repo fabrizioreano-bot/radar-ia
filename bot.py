@@ -6,66 +6,41 @@ from playwright.async_api import async_playwright
 
 JSON_FILE = 'datos.json'
 
-# Lista maestra de pasarelas y bancos a detectar en Perú
-PASARELAS_DETECTAR = [
-    {"id": "yape", "nombre": "Yape", "tiempo": "Inmediato"},
-    {"id": "plin", "nombre": "Plin", "tiempo": "Inmediato"},
-    {"id": "pagoefectivo", "nombre": "PagoEfectivo", "tiempo": "< 5 mins"},
-    {"id": "tarjetas", "nombre": "Visa / Mastercard", "tiempo": "Inmediato"},
-    {"id": "bcp", "nombre": "Banca por Internet BCP", "tiempo": "Inmediato"},
-    {"id": "bbva", "nombre": "BBVA", "tiempo": "Inmediato"},
-    {"id": "interbank", "nombre": "Interbank", "tiempo": "Inmediato"},
-    {"id": "scotiabank", "nombre": "Scotiabank", "tiempo": "Inmediato"},
-    {"id": "safetypay", "nombre": "SafetyPay", "tiempo": "Inmediato"},
-    {"id": "astropay", "nombre": "AstroPay", "tiempo": "Inmediato"},
-    {"id": "tienda", "nombre": "Pago en Tienda / Red de Puntos", "tiempo": "Inmediato"}
-]
+# URLs oficiales de los 7 operadores / loterías
+OPERADORES_URLS = {
+    "doradobet": "https://doradobet.com/",
+    "lotowow": "https://lotowow.pe/",
+    "te-apuesto": "https://www.teapuesto.pe/",
+    "betano": "https://www.betano.pe/",
+    "betsson": "https://www.betsson.pe/",
+    "olimpo-bet": "https://olimpo.bet/",
+    "apuesta-total": "https://www.apuestatotal.com/"
+}
 
-async def extraer_metodos_pagina(page, url, operador_nombre):
-    print(f"🔍 Escaneando en profundidad: {operador_nombre} ({url})...")
-    metodos_encontrados = []
-    
+async def escandear_operador(page, op_id, url):
+    print(f"🔍 Auditando portal en vivo: {op_id} -> {url}")
     try:
-        await page.goto(url, timeout=35000, wait_until="domcontentloaded")
-        await page.wait_for_timeout(3000) # Espera a que carguen scripts dinámicos
+        # Intenta cargar la portada con tiempo límite de 30s
+        response = await page.goto(url, timeout=30000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(2000)
         
-        # Intentar desplegar botones de "Ver más" si existen
-        botones_desplegar = page.locator("text=/Ver más|Mostrar todos|Métodos de pago|Cajero/i")
-        count = await botones_desplegar.count()
-        for i in range(min(count, 3)):
-            try:
-                await botones_desplegar.nth(i).click(timeout=2000)
-                await page.wait_for_timeout(1000)
-            except:
-                pass
-
-        html_content = (await page.content()).lower()
-
-        # Rastrear qué canales están presentes en el texto/código de la página
-        for pasarela in PASARELAS_DETECTAR:
-            palabra_clave = pasarela["id"].lower()
-            if palabra_clave in html_content or pasarela["nombre"].lower() in html_content:
-                metodos_encontrados.append({
-                    "canal": pasarela["nombre"],
-                    "tiempo": pasarela["tiempo"],
-                    "estado": "Operativo",
-                    "min_recarga": "S/ 10",
-                    "max_recarga": "S/ 5,000"
-                })
-
-        print(f"  ✓ {operador_nombre}: Detectados {len(metodos_encontrados)} métodos automáticos.")
+        if response and response.status == 200:
+            print(f"  ✓ {op_id}: Operativo y respondiendo.")
+            return "Operativo"
+        else:
+            print(f"  ⚠️ {op_id}: Respuesta inusual (Código {response.status if response else 'Sin respuesta'})")
+            return "Inestable"
     except Exception as e:
-        print(f"  ❌ Error escaneando {operador_nombre}: {e}")
-
-    return metodos_encontrados
+        print(f"  ❌ {op_id}: Error al acceder -> {e}")
+        return "Fuera de servicio"
 
 async def ejecutar_bot():
-    if os.path.exists(JSON_FILE):
-        with open(JSON_FILE, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-    else:
-        print("⚠️ No existe datos.json base.")
+    if not os.path.exists(JSON_FILE):
+        print("⚠️ No se encontró el archivo datos.json.")
         return
+
+    with open(JSON_FILE, 'r', encoding='utf-8') as f:
+        data = json.load(f)
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
@@ -74,32 +49,28 @@ async def ejecutar_bot():
         )
         page = await context.new_page()
 
-        # Mapeo directo a secciones de ayuda y cajeros de cada plataforma
-        urls_operadores = {
-            "Te Apuesto": "https://www.teapuesto.pe/",
-            "Betano": "https://www.betano.pe/articulo/metodos-de-pago/327645/",
-            "Betsson": "https://www.betsson.pe/pago",
-            "Olimpo.bet": "https://olimpo.bet/",
-            "Apuesta Total": "https://www.apuestatotal.com/"
-        }
-
+        # Recorrer los operadores registrados en datos.json
         for op in data.get("operadores", []):
-            nombre = op.get("nombre")
-            if nombre in urls_operadores:
-                nuevos_metodos = await extraer_metodos_pagina(page, urls_operadores[nombre], nombre)
-                if nuevos_metodos:
-                    # Sobreescribir la lista con todos los métodos detectados en vivo
-                    op["recargas"] = nuevos_metodos
+            op_id = op.get("id")
+            if op_id in OPERADORES_URLS:
+                estado_sitio = await escandear_operador(page, op_id, OPERADORES_URLS[op_id])
+                
+                # Actualiza el estado operativo individual de cada canal de recarga
+                if "recargas" in op:
+                    for recarga in op["recargas"]:
+                        recarga["estado"] = estado_sitio
 
         await browser.close()
 
+    # Actualiza la estampa con fecha y hora de Lima/Perú
     ahora = datetime.now()
     data['ultima_actualizacion'] = f"Última verificación en vivo: {ahora.strftime('%d/%m/%Y a las %H:%M')}"
 
-    # Guardar cambios en JSON
+    # Guarda el JSON preservando las banderas de Visa y los límites del nuevo diseño
     with open(JSON_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    print("✅ datos.json actualizado automáticamente con todos los canales encontrados.")
+
+    print("✅ Proceso de scraping diario finalizado y datos.json actualizado.")
 
 if __name__ == '__main__':
     asyncio.run(ejecutar_bot())
