@@ -2,7 +2,7 @@ name: B-IA Bot - Scraping con Playwright
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 13 * * *'
   workflow_dispatch:
 
 permissions:
