@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última verificación en vivo",
+  "ultima_actualizacion": "Última verificación en vivo: 08/10/2026 a las 13:12",
   "operadores": [
     {
       "id": "doradobet",
@@ -8,16 +8,68 @@
       "logoUrl": "https://doradobet.com/favicon.ico",
       "color": "from-amber-500 to-yellow-600",
       "recargas": [
-        { "canal": "Visa (Débito / Crédito)", "tiempo": "Inmediato", "min_recarga": "S/ 30.00", "max_recarga": "S/ 5,000.00", "visa": true },
-        { "canal": "Yape Directo", "tiempo": "Inmediato", "min_recarga": "S/ 10.00", "max_recarga": "S/ 1,000.00", "visa": false },
-        { "canal": "PagoEfectivo", "tiempo": "< 5 mins", "min_recarga": "S/ 10.00", "max_recarga": "S/ 3,000.00", "visa": false },
-        { "canal": "Plin Directo", "tiempo": "Inmediato", "min_recarga": "S/ 10.00", "max_recarga": "S/ 1,000.00", "visa": false },
-        { "canal": "Mastercard", "tiempo": "Inmediato", "min_recarga": "S/ 30.00", "max_recarga": "S/ 5,000.00", "visa": false },
-        { "canal": "SafetyPay / Banca Móvil", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 5,000.00", "visa": false }
+        {
+          "canal": "Visa (Débito / Crédito)",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 30.00",
+          "max_recarga": "S/ 5,000.00",
+          "visa": true,
+          "estado": "Operativo"
+        },
+        {
+          "canal": "Yape Directo",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 1,000.00",
+          "visa": false,
+          "estado": "Operativo"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "< 5 mins",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 3,000.00",
+          "visa": false,
+          "estado": "Operativo"
+        },
+        {
+          "canal": "Plin Directo",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 1,000.00",
+          "visa": false,
+          "estado": "Operativo"
+        },
+        {
+          "canal": "Mastercard",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 30.00",
+          "max_recarga": "S/ 5,000.00",
+          "visa": false,
+          "estado": "Operativo"
+        },
+        {
+          "canal": "SafetyPay / Banca Móvil",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 5,000.00",
+          "visa": false,
+          "estado": "Operativo"
+        }
       ],
       "retiros": [
-        { "canal": "Transferencia Bancaria", "tiempo": "24-48 hrs", "min_retiro": "S/ 50.00", "max_retiro": "S/ 10,000.00" },
-        { "canal": "Tienda Física / Local", "tiempo": "Inmediato", "min_retiro": "S/ 20.00", "max_retiro": "S/ 3,000.00" }
+        {
+          "canal": "Transferencia Bancaria",
+          "tiempo": "24-48 hrs",
+          "min_retiro": "S/ 50.00",
+          "max_retiro": "S/ 10,000.00"
+        },
+        {
+          "canal": "Tienda Física / Local",
+          "tiempo": "Inmediato",
+          "min_retiro": "S/ 20.00",
+          "max_retiro": "S/ 3,000.00"
+        }
       ]
     },
     {
@@ -27,14 +79,54 @@
       "logoUrl": "https://lotowow.pe/favicon.ico",
       "color": "from-teal-500 to-emerald-600",
       "recargas": [
-        { "canal": "Tarjeta Visa", "tiempo": "Inmediato", "min_recarga": "S/ 10.00", "max_recarga": "S/ 2,000.00", "visa": true },
-        { "canal": "Yape QR", "tiempo": "Inmediato", "min_recarga": "S/ 5.00", "max_recarga": "S/ 500.00", "visa": false },
-        { "canal": "PagoEfectivo", "tiempo": "< 5 mins", "min_recarga": "S/ 10.00", "max_recarga": "S/ 1,000.00", "visa": false },
-        { "canal": "Plin QR", "tiempo": "Inmediato", "min_recarga": "S/ 5.00", "max_recarga": "S/ 500.00", "visa": false },
-        { "canal": "Banca por Internet", "tiempo": "Inmediato", "min_recarga": "S/ 15.00", "max_recarga": "S/ 2,000.00", "visa": false }
+        {
+          "canal": "Tarjeta Visa",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 2,000.00",
+          "visa": true,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Yape QR",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 5.00",
+          "max_recarga": "S/ 500.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "< 5 mins",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 1,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Plin QR",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 5.00",
+          "max_recarga": "S/ 500.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Banca por Internet",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 15.00",
+          "max_recarga": "S/ 2,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        }
       ],
       "retiros": [
-        { "canal": "Transferencia Bancaria (BCP / Interbank)", "tiempo": "12-24 hrs", "min_retiro": "S/ 30.00", "max_retiro": "S/ 2,000.00" }
+        {
+          "canal": "Transferencia Bancaria (BCP / Interbank)",
+          "tiempo": "12-24 hrs",
+          "min_retiro": "S/ 30.00",
+          "max_retiro": "S/ 2,000.00"
+        }
       ]
     },
     {
@@ -44,16 +136,68 @@
       "logoUrl": "https://www.teapuesto.pe/favicon.ico",
       "color": "from-red-600 to-orange-600",
       "recargas": [
-        { "canal": "Visa / Mastercard", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 2,500.00", "visa": true },
-        { "canal": "Yape", "tiempo": "Inmediato", "min_recarga": "S/ 10.00", "max_recarga": "S/ 500.00", "visa": false },
-        { "canal": "PagoEfectivo", "tiempo": "< 5 mins", "min_recarga": "S/ 10.00", "max_recarga": "S/ 3,000.00", "visa": false },
-        { "canal": "Plin", "tiempo": "Inmediato", "min_recarga": "S/ 10.00", "max_recarga": "S/ 500.00", "visa": false },
-        { "canal": "Banca Móvil (BCP/BBVA)", "tiempo": "Inmediato", "min_recarga": "S/ 15.00", "max_recarga": "S/ 5,000.00", "visa": false },
-        { "canal": "SafetyPay", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 3,000.00", "visa": false }
+        {
+          "canal": "Visa / Mastercard",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 2,500.00",
+          "visa": true,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Yape",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 500.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "< 5 mins",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 3,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Plin",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 500.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Banca Móvil (BCP/BBVA)",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 15.00",
+          "max_recarga": "S/ 5,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "SafetyPay",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 3,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        }
       ],
       "retiros": [
-        { "canal": "Cobro en Punto de Venta / Lototienda", "tiempo": "Inmediato", "min_retiro": "S/ 10.00", "max_retiro": "S/ 1,500.00" },
-        { "canal": "Cuenta Bancaria", "tiempo": "24-72 hrs", "min_retiro": "S/ 50.00", "max_retiro": "S/ 5,000.00" }
+        {
+          "canal": "Cobro en Punto de Venta / Lototienda",
+          "tiempo": "Inmediato",
+          "min_retiro": "S/ 10.00",
+          "max_retiro": "S/ 1,500.00"
+        },
+        {
+          "canal": "Cuenta Bancaria",
+          "tiempo": "24-72 hrs",
+          "min_retiro": "S/ 50.00",
+          "max_retiro": "S/ 5,000.00"
+        }
       ]
     },
     {
@@ -63,13 +207,46 @@
       "logoUrl": "https://www.betano.pe/favicon.ico",
       "color": "from-orange-600 to-red-600",
       "recargas": [
-        { "canal": "Tarjetas Visa / Mastercard", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 10,000.00", "visa": true },
-        { "canal": "Yape QR", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 3,500.00", "visa": false },
-        { "canal": "PagoEfectivo", "tiempo": "< 5 mins", "min_recarga": "S/ 20.00", "max_recarga": "S/ 10,000.00", "visa": false },
-        { "canal": "Plin QR", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 3,500.00", "visa": false }
+        {
+          "canal": "Tarjetas Visa / Mastercard",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 10,000.00",
+          "visa": true,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Yape QR",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 3,500.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "< 5 mins",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 10,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Plin QR",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 3,500.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        }
       ],
       "retiros": [
-        { "canal": "Transferencia Bancaria Directa", "tiempo": "24 hrs", "min_retiro": "S/ 50.00", "max_retiro": "S/ 10,000.00" }
+        {
+          "canal": "Transferencia Bancaria Directa",
+          "tiempo": "24 hrs",
+          "min_retiro": "S/ 50.00",
+          "max_retiro": "S/ 10,000.00"
+        }
       ]
     },
     {
@@ -79,12 +256,38 @@
       "logoUrl": "https://www.betsson.pe/favicon.ico",
       "color": "from-amber-500 to-orange-500",
       "recargas": [
-        { "canal": "Visa / Mastercard", "tiempo": "Inmediato", "min_recarga": "S/ 30.00", "max_recarga": "S/ 4,000.00", "visa": true },
-        { "canal": "Yape", "tiempo": "Inmediato", "min_recarga": "S/ 15.00", "max_recarga": "S/ 3,000.00", "visa": false },
-        { "canal": "PagoEfectivo", "tiempo": "2-5 mins", "min_recarga": "S/ 15.00", "max_recarga": "S/ 3,000.00", "visa": false }
+        {
+          "canal": "Visa / Mastercard",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 30.00",
+          "max_recarga": "S/ 4,000.00",
+          "visa": true,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Yape",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 15.00",
+          "max_recarga": "S/ 3,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "2-5 mins",
+          "min_recarga": "S/ 15.00",
+          "max_recarga": "S/ 3,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        }
       ],
       "retiros": [
-        { "canal": "Transferencia Bancaria", "tiempo": "24-48 hrs", "min_retiro": "S/ 60.00", "max_retiro": "S/ 12,000.00" }
+        {
+          "canal": "Transferencia Bancaria",
+          "tiempo": "24-48 hrs",
+          "min_retiro": "S/ 60.00",
+          "max_retiro": "S/ 12,000.00"
+        }
       ]
     },
     {
@@ -94,12 +297,38 @@
       "logoUrl": "https://olimpo.bet/favicon.ico",
       "color": "from-purple-600 to-indigo-600",
       "recargas": [
-        { "canal": "Tarjetas Débito/Crédito Visa", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 3,000.00", "visa": true },
-        { "canal": "Yape", "tiempo": "Inmediato", "min_recarga": "S/ 10.00", "max_recarga": "S/ 2,000.00", "visa": false },
-        { "canal": "PagoEfectivo", "tiempo": "< 5 mins", "min_recarga": "S/ 20.00", "max_recarga": "S/ 5,000.00", "visa": false }
+        {
+          "canal": "Tarjetas Débito/Crédito Visa",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 3,000.00",
+          "visa": true,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Yape",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 2,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "< 5 mins",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 5,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        }
       ],
       "retiros": [
-        { "canal": "Transferencia Bancaria", "tiempo": "24 hrs", "min_retiro": "S/ 50.00", "max_retiro": "S/ 5,000.00" }
+        {
+          "canal": "Transferencia Bancaria",
+          "tiempo": "24 hrs",
+          "min_retiro": "S/ 50.00",
+          "max_retiro": "S/ 5,000.00"
+        }
       ]
     },
     {
@@ -109,13 +338,44 @@
       "logoUrl": "https://www.apuestatotal.com/favicon.ico",
       "color": "from-red-600 to-rose-700",
       "recargas": [
-        { "canal": "Tarjetas Visa / Mastercard", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 5,000.00", "visa": true },
-        { "canal": "Yape Directo", "tiempo": "Inmediato", "min_recarga": "S/ 10.00", "max_recarga": "S/ 3,000.00", "visa": false },
-        { "canal": "PagoEfectivo", "tiempo": "Inmediato", "min_recarga": "S/ 20.00", "max_recarga": "S/ 5,000.00", "visa": false }
+        {
+          "canal": "Tarjetas Visa / Mastercard",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 5,000.00",
+          "visa": true,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "Yape Directo",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 10.00",
+          "max_recarga": "S/ 3,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        },
+        {
+          "canal": "PagoEfectivo",
+          "tiempo": "Inmediato",
+          "min_recarga": "S/ 20.00",
+          "max_recarga": "S/ 5,000.00",
+          "visa": false,
+          "estado": "Fuera de servicio"
+        }
       ],
       "retiros": [
-        { "canal": "Cobro en Tienda / Local", "tiempo": "Inmediato", "min_retiro": "S/ 10.00", "max_retiro": "S/ 3,000.00" },
-        { "canal": "Transferencia Bancaria", "tiempo": "24-48 hrs", "min_retiro": "S/ 50.00", "max_retiro": "S/ 10,000.00" }
+        {
+          "canal": "Cobro en Tienda / Local",
+          "tiempo": "Inmediato",
+          "min_retiro": "S/ 10.00",
+          "max_retiro": "S/ 3,000.00"
+        },
+        {
+          "canal": "Transferencia Bancaria",
+          "tiempo": "24-48 hrs",
+          "min_retiro": "S/ 50.00",
+          "max_retiro": "S/ 10,000.00"
+        }
       ]
     }
   ]
