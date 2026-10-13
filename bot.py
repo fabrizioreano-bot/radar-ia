@@ -6,42 +6,60 @@ from playwright.async_api import async_playwright
 
 JSON_FILE = 'datos.json'
 
-# URLs oficiales de los 7 operadores / loterías
-OPERADORES_URLS = {
-    "doradobet": "https://doradobet.com/",
-    "lotowow": "https://lotowow.pe/",
-    "te-apuesto": "https://www.teapuesto.pe/",
-    "betano": "https://www.betano.pe/",
-    "betsson": "https://www.betsson.pe/",
-    "olimpo-bet": "https://olimpo.bet/",
-    "apuesta-total": "https://www.apuestatotal.com/"
+# URLs públicas donde los operadores publican sus campañas / promociones
+URLS_PROMOS = {
+    "doradobet": "https://doradobet.com/promociones",
+    "betano": "https://www.betano.pe/ofertas/",
+    "apuesta-total": "https://www.apuestatotal.com/promociones",
+    "te-apuesto": "https://www.teapuesto.pe/promociones",
+    "betsson": "https://www.betsson.pe/promociones/"
 }
 
-async def escandear_operador(page, op_id, url):
-    print(f"🔍 Auditando portal en vivo: {op_id} -> {url}")
+async def extraer_campanas_reales(page, op_id, url):
+    print(f"🔍 [Extrayendo Datos] Escaneando promociones en vivo: {url}")
+    campanas_encontradas = []
     try:
-        # Intenta cargar la portada con tiempo límite de 30s
-        response = await page.goto(url, timeout=30000, wait_until="domcontentloaded")
-        await page.wait_for_timeout(2000)
+        # Entramos a la página de promociones
+        await page.goto(url, timeout=30000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(4000) # Esperamos 4 segundos para que carguen los banners
         
-        if response and response.status == 200:
-            print(f"  ✓ {op_id}: Operativo y respondiendo.")
-            return "Operativo"
+        # Extraemos todos los subtítulos (h2 y h3) que suelen ser los nombres de las promociones
+        elementos = await page.query_selector_all("h2, h3")
+        for el in elementos:
+            texto = await el.inner_text()
+            # Filtramos textos cortos o muy largos para quedarnos con los títulos reales
+            if texto and 5 < len(texto) < 50:
+                campanas_encontradas.append(texto.strip())
+        
+        # Eliminamos duplicados
+        campanas_encontradas = list(set(campanas_encontradas))
+        
+        if campanas_encontradas:
+            print(f"  ✓ {op_id}: ¡Datos extraídos! ({len(campanas_encontradas)} campañas)")
+            return campanas_encontradas[:2] # Devolvemos las 2 campañas principales
         else:
-            print(f"  ⚠️ {op_id}: Respuesta inusual (Código {response.status if response else 'Sin respuesta'})")
-            return "Inestable"
+            print(f"  ⚠️ {op_id}: No se detectaron textos de campañas legibles.")
+            return []
     except Exception as e:
-        print(f"  ❌ {op_id}: Error al acceder -> {e}")
-        return "Fuera de servicio"
+        print(f"  ❌ {op_id}: Bloqueo o error al leer la página -> {e}")
+        return []
 
 async def ejecutar_bot():
     if not os.path.exists(JSON_FILE):
         print("⚠️ No se encontró el archivo datos.json.")
         return
 
+    # 1. Leemos la base de datos actual
     with open(JSON_FILE, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
+    # Aseguramos que exista el bloque de campañas en el JSON
+    if "campanas_extraidas" not in data:
+        data["campanas_extraidas"] = []
+    
+    nuevas_campanas = []
+
+    # 2. Iniciamos el navegador robot
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         context = await browser.new_context(
@@ -49,28 +67,33 @@ async def ejecutar_bot():
         )
         page = await context.new_page()
 
-        # Recorrer los operadores registrados en datos.json
-        for op in data.get("operadores", []):
-            op_id = op.get("id")
-            if op_id in OPERADORES_URLS:
-                estado_sitio = await escandear_operador(page, op_id, OPERADORES_URLS[op_id])
-                
-                # Actualiza el estado operativo individual de cada canal de recarga
-                if "recargas" in op:
-                    for recarga in op["recargas"]:
-                        recarga["estado"] = estado_sitio
+        # 3. Recorremos las casas y extraemos la data
+        for op_id, url in URLS_PROMOS.items():
+            titulos = await extraer_campanas_reales(page, op_id, url)
+            
+            for titulo in titulos:
+                nuevas_campanas.append({
+                    "operador": op_id.capitalize(),
+                    "tipo": "Detectada en Web",
+                    "nombre": titulo,
+                    "estado": "Activa",
+                    "ganadores": "Automático (Scraping)"
+                })
 
         await browser.close()
 
-    # Actualiza la estampa con fecha y hora de Lima/Perú
+    # 4. Actualizamos el JSON con la data 100% fresca extraída de las páginas
     ahora = datetime.now()
-    data['ultima_actualizacion'] = f"Última verificación en vivo: {ahora.strftime('%d/%m/%Y a las %H:%M')}"
+    data['ultima_actualizacion'] = f"Última extracción automática: {ahora.strftime('%d/%m/%Y %H:%M')}"
+    
+    # Si encontró campañas en vivo, reemplazamos las antiguas
+    if nuevas_campanas:
+        data["campanas_extraidas"] = nuevas_campanas
 
-    # Guarda el JSON preservando las banderas de Visa y los límites del nuevo diseño
     with open(JSON_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-    print("✅ Proceso de scraping diario finalizado y datos.json actualizado.")
+    print("✅ Proceso completado. La data real ha sido sacada de las páginas.")
 
 if __name__ == '__main__':
     asyncio.run(ejecutar_bot())
