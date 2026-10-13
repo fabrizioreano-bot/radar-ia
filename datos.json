@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última verificación en vivo: 13/10/2026 a las 13:17",
+  "ultima_actualizacion": "Última extracción automática: 13/10/2026 21:24",
   "operadores": [
     {
       "id": "doradobet",
@@ -377,6 +377,36 @@
           "max_retiro": "S/ 10,000.00"
         }
       ]
+    }
+  ],
+  "campanas_extraidas": [
+    {
+      "operador": "Doradobet",
+      "tipo": "Detectada en Web",
+      "nombre": "DEPORTES",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Doradobet",
+      "tipo": "Detectada en Web",
+      "nombre": "TOP VIRTUALES",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Apuesta-total",
+      "tipo": "Detectada en Web",
+      "nombre": "Duplicamos tu primera recarga",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Apuesta-total",
+      "tipo": "Detectada en Web",
+      "nombre": "SORTEO 5 ENTRADAS DOBLES PARA CHAPA TU MONEY",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
     }
   ]
 }
