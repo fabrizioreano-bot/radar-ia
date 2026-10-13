@@ -3,72 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B-IA | Radar de Métodos, Límites y Retiros</title>
+  <title>B-IA | Radar de Inteligencia de Mercado</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen">
 
   <div class="flex h-screen overflow-hidden">
-    <!-- Sidebar Navegación -->
+    <!-- Sidebar -->
     <aside class="w-64 bg-slate-900 text-white flex flex-col shrink-0 border-r border-slate-800">
       <div class="p-6 text-2xl font-black tracking-wider border-b border-slate-800 flex items-center gap-2">
         <span>B-</span><span class="text-orange-500">IA</span>
       </div>
-      <nav class="flex-1 p-4 space-y-2 font-semibold">
+      
+      <div class="px-4 pt-4 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">Caja y Transacciones</div>
+      <nav class="px-2 space-y-1 font-semibold">
         <button id="nav-recargas" onclick="cambiarPestana('recargas')" class="w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition">
-          <i class="fa-solid fa-wallet"></i> Métodos de Recarga
+          <i class="fa-solid fa-wallet w-5"></i> Métodos de Recarga
         </button>
         <button id="nav-retiros" onclick="cambiarPestana('retiros')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
-          <i class="fa-solid fa-hand-holding-dollar"></i> Cobros y Retiros
+          <i class="fa-solid fa-hand-holding-dollar w-5"></i> Cobros y Retiros
         </button>
       </nav>
+
+      <div class="px-4 pt-6 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">Inteligencia de Mercado</div>
+      <nav class="px-2 space-y-1 font-semibold flex-1">
+        <button id="nav-cuotas" onclick="cambiarPestana('cuotas')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
+          <i class="fa-solid fa-chart-line w-5"></i> Comparativo Cuotas
+        </button>
+        <button id="nav-campanas" onclick="cambiarPestana('campanas')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
+          <i class="fa-solid fa-trophy w-5"></i> Campañas & Ganadores
+        </button>
+      </nav>
+      
+      <div class="p-4 border-t border-slate-800">
+        <button onclick="descargarPlanB()" class="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-3 rounded-xl transition shadow-lg">
+          <i class="fa-solid fa-file-excel text-sm"></i> Descargar Plan B (Excel)
+        </button>
+      </div>
     </aside>
 
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto p-8 bg-slate-950">
-      
-      <!-- Top Bar -->
-      <header class="mb-8 flex flex-wrap justify-between items-center gap-4">
-        <div>
-          <h1 id="titulo-seccion" class="text-3xl font-extrabold text-white flex items-center gap-3">
-            <i class="fa-solid fa-bolt text-orange-500"></i> Radar de Métodos & Límites Operativos
-          </h1>
-          <p id="subtitulo-seccion" class="text-slate-400 text-sm mt-1">Vista dinámica con los métodos principales por marca. Haz clic para expandir.</p>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <button onclick="descargarReporteVisa()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-3 rounded-xl shadow-lg transition text-sm">
-            <i class="fa-brands fa-cc-visa text-xl"></i> Descargar Análisis Visa (Excel / CSV)
-          </button>
-        </div>
+      <header class="mb-8">
+        <h1 id="titulo-seccion" class="text-3xl font-extrabold text-white flex items-center gap-3">
+          <i class="fa-solid fa-wallet text-orange-500"></i> Métodos de Recarga
+        </h1>
+        <p id="subtitulo-seccion" class="text-slate-400 text-sm mt-1">Monitoreo de pasarelas, límites y tiempos de transacción.</p>
       </header>
 
-      <!-- Métricas -->
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-          <div class="text-slate-400 text-xs font-bold uppercase mb-1">Operadores Activos</div>
-          <div id="total-casas" class="text-3xl font-black text-white">0</div>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-          <div id="label-metric-2" class="text-slate-400 text-xs font-bold uppercase mb-1">Canales Aceptan Visa</div>
-          <div id="total-visa" class="text-3xl font-black text-blue-400">0</div>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-          <div id="label-metric-3" class="text-slate-400 text-xs font-bold uppercase mb-1">Rango Mínimo Visa Promedio</div>
-          <div id="promedio-visa" class="text-3xl font-black text-emerald-400">S/ 0.00</div>
-        </div>
-      </section>
-
-      <!-- Grid de Cuadros Dinámicos -->
-      <div id="contenedor-tarjetas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="text-slate-500 col-span-full text-center py-12">Cargando cuadros dinámicos...</div>
+      <div id="contenedor-dinamico" class="pb-10">
+        <div class="text-slate-500 text-center py-12">Cargando datos en vivo...</div>
       </div>
-
     </main>
   </div>
 
-  <!-- Modal Flotante de Detalle Completo -->
+  <!-- Modal Flotante -->
   <div id="modal-detalle" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative flex flex-col max-h-[85vh]">
       <button onclick="cerrarModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold p-2">
@@ -83,203 +73,155 @@
     let globalData = null;
     let pestanaActual = 'recargas';
 
+    const datosMercado = {
+      cuotas: [
+        { operador: "DoradoBet", logo: "DB", color: "text-amber-500", evento: "Perú vs Brasil", L: "4.50", E: "3.20", V: "1.85" },
+        { operador: "Betano", logo: "BT", color: "text-orange-600", evento: "Perú vs Brasil", L: "4.65", E: "3.10", V: "1.80" },
+        { operador: "Te Apuesto", logo: "TA", color: "text-red-600", evento: "Perú vs Brasil", L: "4.20", E: "3.10", V: "1.75" }
+      ]
+    };
+
     async function cargarDatos() {
       try {
-        const res = await fetch('datos.json?v=' + new Date().getTime());
+        const urlFetch = 'datos.json?nocache=' + new Date().getTime();
+        const res = await fetch(urlFetch);
+        if (!res.ok) throw new Error('No se pudo cargar datos.json');
         globalData = await res.json();
-        renderizarPestana();
+        renderizarVista();
       } catch (e) {
-        console.error("Error al cargar datos:", e);
+        document.getElementById('contenedor-dinamico').innerHTML = `<div class="text-red-400 text-center py-12">⚠️ Error de conexión: ${e.message}</div>`;
       }
     }
 
     function cambiarPestana(pestana) {
       pestanaActual = pestana;
-      
-      const navRecargas = document.getElementById('nav-recargas');
-      const navRetiros = document.getElementById('nav-retiros');
-
-      if (pestana === 'recargas') {
-        navRecargas.className = "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition";
-        navRetiros.className = "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
-        document.getElementById('titulo-seccion').innerHTML = '<i class="fa-solid fa-bolt text-orange-500"></i> Radar de Métodos & Límites Operativos';
-        document.getElementById('subtitulo-seccion').innerText = "Vista dinámica con los métodos principales por marca. Haz clic para expandir.";
-      } else {
-        navRetiros.className = "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition";
-        navRecargas.className = "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
-        document.getElementById('titulo-seccion').innerHTML = '<i class="fa-solid fa-hand-holding-dollar text-orange-500"></i> Cobros y Retiros de Ganancias';
-        document.getElementById('subtitulo-seccion').innerText = "Monitoreo de tiempos de pago, canales de retiro y montos máximos permitidos.";
-      }
-
-      renderizarPestana();
-    }
-
-    function renderizarPestana() {
-      if (!globalData || !globalData.operadores) return;
-
-      const contenedor = document.getElementById('contenedor-tarjetas');
-      contenedor.innerHTML = '';
-
-      let countVisa = 0;
-      let sumaMinVisa = 0;
-
-      document.getElementById('total-casas').innerText = `${globalData.operadores.length} Casas`;
-
-      globalData.operadores.forEach((op, index) => {
-        const listaMetodos = pestanaActual === 'recargas' ? (op.recargas || []) : (op.retiros || []);
-        const recargasSugeridas = listaMetodos.slice(0, 3);
-        const cantidadRestante = listaMetodos.length - 3;
-
-        let recargasHtml = recargasSugeridas.map(r => {
-          if (pestanaActual === 'recargas' && r.visa) {
-            countVisa++;
-            let minNum = parseFloat(r.min_recarga.replace(/[^\d.]/g, '')) || 0;
-            sumaMinVisa += minNum;
-          }
-
-          const minLabel = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
-          const maxLabel = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
-
-          return `
-            <div class="p-3 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/60'} rounded-xl">
-              <div class="flex justify-between items-center mb-1">
-                <span class="text-xs font-bold text-white flex items-center gap-1.5">
-                  ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-sm"></i>' : '<i class="fa-solid fa-credit-card text-slate-500 text-xs"></i>'}
-                  ${r.canal}
-                </span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">
-                  ${r.tiempo}
-                </span>
-              </div>
-              <div class="flex justify-between text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-800/80">
-                <span>Mín: <strong class="text-slate-200">${minLabel}</strong></span>
-                <span>Máx: <strong class="text-slate-200">${maxLabel}</strong></span>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        if (recargasHtml === '') {
-          recargasHtml = '<div class="text-xs text-slate-500 italic py-4 text-center">Sin información de retiros</div>';
-        }
-
-        const botonVerMas = cantidadRestante > 0 
-          ? `<button onclick="abrirModal(${index})" class="w-full py-2.5 mt-2 bg-slate-800 hover:bg-slate-700 text-orange-400 hover:text-orange-300 font-bold text-xs rounded-xl border border-slate-700/80 transition flex items-center justify-center gap-2">
-              <span>Ver todos (+${cantidadRestante})</span>
-              <i class="fa-solid fa-chevron-right text-[10px]"></i>
-             </button>`
-          : '';
-
-        const card = `
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
-            <div>
-              <div class="p-4 bg-gradient-to-r ${op.color} flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-white/90 p-1 flex items-center justify-center rounded-xl shadow-md border border-white/20">
-                    <img src="${op.logoUrl}" alt="${op.nombre}" class="max-h-7 max-w-7 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <span class="hidden font-black text-slate-900 text-xs">${op.logoText}</span>
-                  </div>
-                  <h3 class="text-lg font-bold text-white tracking-wide">${op.nombre}</h3>
-                </div>
-                <span class="text-xs font-bold bg-black/40 px-2.5 py-1 rounded-lg text-slate-200">
-                  ${listaMetodos.length} Opciones
-                </span>
-              </div>
-              <div class="p-4 space-y-2.5">
-                ${recargasHtml}
-              </div>
-            </div>
-            <div class="px-4 pb-4">
-              ${botonVerMas}
-            </div>
-          </div>
-        `;
-        contenedor.innerHTML += card;
+      ['recargas', 'retiros', 'cuotas', 'campanas'].forEach(b => {
+        const btn = document.getElementById('nav-' + b);
+        btn.className = (b === pestana) 
+          ? "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition"
+          : "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
       });
 
-      if (pestanaActual === 'recargas') {
-        document.getElementById('label-metric-2').innerText = "Canales Aceptan Visa";
-        document.getElementById('total-visa').innerText = `${countVisa} Pasarelas`;
-        document.getElementById('label-metric-3').innerText = "Rango Mínimo Visa Promedio";
-        document.getElementById('promedio-visa').innerText = countVisa > 0 ? `S/ ${(sumaMinVisa / countVisa).toFixed(2)}` : 'S/ 0.00';
-      } else {
-        document.getElementById('label-metric-2').innerText = "Modo de Salida";
-        document.getElementById('total-visa').innerText = "Transferencias & Efectivo";
-        document.getElementById('label-metric-3').innerText = "Tiempo Promedio Retiro";
-        document.getElementById('promedio-visa').innerText = "24 Horas";
+      const titulos = {
+        'recargas': ['<i class="fa-solid fa-wallet text-orange-500"></i> Métodos de Recarga', 'Límites operativos y canales de ingreso.'],
+        'retiros': ['<i class="fa-solid fa-hand-holding-dollar text-orange-500"></i> Cobros y Retiros', 'Tiempos de pago y pasarelas de salida.'],
+        'cuotas': ['<i class="fa-solid fa-chart-line text-blue-500"></i> Comparativo Cuotas', 'Márgenes frente a la competencia.'],
+        'campanas': ['<i class="fa-solid fa-trophy text-yellow-500"></i> Campañas & Ganadores', 'Status de promociones y ganadores públicos.']
+      };
+
+      document.getElementById('titulo-seccion').innerHTML = titulos[pestana][0];
+      document.getElementById('subtitulo-seccion').innerText = titulos[pestana][1];
+      renderizarVista();
+    }
+
+    function renderizarVista() {
+      const contenedor = document.getElementById('contenedor-dinamico');
+      contenedor.innerHTML = '';
+
+      if (pestanaActual === 'recargas' || pestanaActual === 'retiros') {
+        let html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
+        if(globalData && globalData.operadores) {
+          globalData.operadores.forEach((op, index) => {
+            const listaMetodos = pestanaActual === 'recargas' ? (op.recargas || []) : (op.retiros || []);
+            const metodosPrincipales = listaMetodos.slice(0, 4);
+            const cantidadRestante = listaMetodos.length - 4;
+
+            let itemsHtml = metodosPrincipales.map(r => {
+              const minVal = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
+              const maxVal = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
+              return `
+                <div class="p-3 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/60'} rounded-xl">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                      ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-sm"></i>' : '<i class="fa-solid fa-credit-card text-slate-500 text-xs"></i>'}
+                      ${r.canal}
+                    </span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">${r.tiempo}</span>
+                  </div>
+                  <div class="flex justify-between text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-800/80">
+                    <span>Mín: <strong class="text-slate-200">${minVal}</strong></span>
+                    <span>Máx: <strong class="text-slate-200">${maxVal}</strong></span>
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+            const botonVerMas = cantidadRestante > 0 
+              ? `<button onclick="abrirModal(${index})" class="w-full py-2.5 mt-2 bg-slate-800 hover:bg-slate-700 text-orange-400 font-bold text-xs rounded-xl transition flex items-center justify-center gap-2">Ver todas las pasarelas (+${cantidadRestante}) <i class="fa-solid fa-chevron-right"></i></button>` 
+              : '';
+
+            html += `
+              <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
+                <div>
+                  <div class="p-4 bg-gradient-to-r ${op.color} flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-white tracking-wide">${op.nombre}</h3>
+                    <span class="text-xs font-bold bg-black/40 px-2 py-1 rounded-lg text-white">${listaMetodos.length} Pasarelas</span>
+                  </div>
+                  <div class="p-4 space-y-2.5">${itemsHtml}</div>
+                </div>
+                <div class="px-4 pb-4">${botonVerMas}</div>
+              </div>
+            `;
+          });
+        }
+        html += '</div>';
+        contenedor.innerHTML = html;
+
+      } else if (pestanaActual === 'cuotas') {
+        let filas = datosMercado.cuotas.map(c => `
+          <tr class="border-b border-slate-800 hover:bg-slate-800/50 transition">
+            <td class="p-4 font-bold text-white">${c.operador}</td>
+            <td class="p-4 text-slate-300">${c.evento}</td>
+            <td class="p-4"><span class="bg-slate-950 px-3 py-1 border border-slate-700 text-emerald-400 rounded">${c.L}</span></td>
+            <td class="p-4"><span class="bg-slate-950 px-3 py-1 border border-slate-700 text-slate-300 rounded">${c.E}</span></td>
+            <td class="p-4"><span class="bg-slate-950 px-3 py-1 border border-slate-700 text-emerald-400 rounded">${c.V}</span></td>
+          </tr>
+        `).join('');
+        contenedor.innerHTML = `<div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+          <table class="w-full text-left text-sm"><thead class="bg-slate-950 text-slate-400 text-xs uppercase"><tr><th class="p-4">Operador</th><th class="p-4">Evento</th><th class="p-4">Local</th><th class="p-4">Empate</th><th class="p-4">Visita</th></tr></thead><tbody>${filas}</tbody></table></div>`;
+      
+      } else if (pestanaActual === 'campanas') {
+        let listaCampanas = (globalData && globalData.campanas_extraidas) ? globalData.campanas_extraidas : [];
+        let cards = listaCampanas.map(c => `
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 border-l-4 border-l-emerald-500">
+            <div class="flex justify-between"><span class="text-xs font-bold text-slate-400 uppercase">${c.operador} - ${c.tipo}</span><span class="text-xs text-emerald-400">${c.estado}</span></div>
+            <h3 class="text-xl font-bold text-white mt-1 mb-3">${c.nombre}</h3>
+            <p class="text-sm text-slate-300 border-t border-slate-800 pt-3"><i class="fa-solid fa-bullhorn mr-2 text-orange-400"></i>Ganadores: <strong>${c.ganadores}</strong></p>
+          </div>
+        `).join('');
+        contenedor.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6">${cards || '<p class="text-slate-500">No hay campañas registradas.</p>'}</div>`;
       }
     }
 
     function abrirModal(index) {
       const op = globalData.operadores[index];
       const listaMetodos = pestanaActual === 'recargas' ? op.recargas : op.retiros;
-      const modalHeader = document.getElementById('modal-header');
-      const modalBody = document.getElementById('modal-body');
-
-      modalHeader.innerHTML = `
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-white/90 p-1.5 flex items-center justify-center rounded-xl shadow-md border border-white/20">
-            <img src="${op.logoUrl}" alt="${op.nombre}" class="max-h-8 max-w-8 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="hidden font-black text-slate-900 text-sm">${op.logoText}</span>
-          </div>
-          <div>
-            <h2 class="text-2xl font-bold text-white">${op.nombre}</h2>
-            <p class="text-xs text-slate-400">Lista completa de ${pestanaActual === 'recargas' ? 'recargas' : 'retiros'} (${listaMetodos.length} canales)</p>
-          </div>
-        </div>
-      `;
-
-      modalBody.innerHTML = listaMetodos.map(r => {
-        const minLabel = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
-        const maxLabel = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
-
+      document.getElementById('modal-header').innerHTML = `<h2 class="text-2xl font-bold text-white">${op.nombre}</h2><p class="text-xs text-slate-400">Lista completa de pasarelas (${listaMetodos.length} opciones)</p>`;
+      
+      document.getElementById('modal-body').innerHTML = listaMetodos.map(r => {
+        const minL = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
+        const maxL = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
         return `
           <div class="p-4 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/80'} rounded-xl">
             <div class="flex justify-between items-center mb-2">
-              <span class="text-sm font-bold text-white flex items-center gap-2">
-                ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-lg"></i>' : '<i class="fa-solid fa-wallet text-slate-400"></i>'}
-                ${r.canal}
-              </span>
-              <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                ${r.tiempo}
-              </span>
+              <span class="text-sm font-bold text-white flex items-center gap-2">${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400"></i>' : '<i class="fa-solid fa-wallet text-slate-400"></i>'} ${r.canal}</span>
+              <span class="text-xs text-emerald-400">${r.tiempo}</span>
             </div>
-            <div class="grid grid-cols-2 gap-4 text-xs text-slate-300 pt-2 border-t border-slate-800">
-              <div>Límite Mínimo: <strong class="text-white text-sm block mt-0.5">${minLabel}</strong></div>
-              <div>Límite Máximo: <strong class="text-white text-sm block mt-0.5">${maxLabel}</strong></div>
+            <div class="grid grid-cols-2 text-xs text-slate-300 pt-2 border-t border-slate-800">
+              <div>Mínimo: <strong class="text-white">${minL}</strong></div><div>Máximo: <strong class="text-white">${maxL}</strong></div>
             </div>
-          </div>
-        `;
+          </div>`;
       }).join('');
-
       document.getElementById('modal-detalle').classList.remove('hidden');
     }
 
-    function cerrarModal() {
-      document.getElementById('modal-detalle').classList.add('hidden');
-    }
+    function cerrarModal() { document.getElementById('modal-detalle').classList.add('hidden'); }
 
-    function descargarReporteVisa() {
-      let csv = 'MARCA_OPERADOR,METODO,LIMITE_MINIMO,LIMITE_MAXIMO,TIEMPO,VISA\n';
-
-      globalData.operadores.forEach(op => {
-        const lista = pestanaActual === 'recargas' ? op.recargas : op.retiros;
-        if (lista) {
-          lista.forEach(r => {
-            if (pestanaActual === 'retiros' || r.visa) {
-              const minVal = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
-              const maxVal = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
-              csv += `"${op.nombre}","${r.canal}","${minVal}","${maxVal}","${r.tiempo}","${r.visa ? 'SI' : 'NO'}"\n`;
-            }
-          });
-        }
-      });
-
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
+    function descargarPlanB() {
+      let csv = "SECCION,OPERADOR,DATO_1,DATO_2,DATO_3,ESTADO_GANADORES\nCUOTAS,DoradoBet,Perú vs Brasil,Local: 4.50,Visita: 1.85,-\nCAMPAÑAS,DoradoBet,Sorteo Camiseta,Mecánica: Apuesta 50,-,No publicados aún\n";
       const a = document.createElement('a');
-      a.href = url;
-      a.download = `Analisis_${pestanaActual.toUpperCase()}_${new Date().toISOString().slice(0,10)}.csv`;
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+      a.download = `Matriz_PlanB_Manual_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
     }
 
