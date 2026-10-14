@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B-IA | Radar de Inteligencia de Mercado</title>
+  <title>B-IA | Radar de Mercado</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -12,220 +12,124 @@
   <div class="flex h-screen overflow-hidden">
     <!-- Sidebar -->
     <aside class="w-64 bg-slate-900 text-white flex flex-col shrink-0 border-r border-slate-800">
-      <div class="p-6 text-2xl font-black tracking-wider border-b border-slate-800 flex items-center gap-2">
-        <span>B-</span><span class="text-orange-500">IA</span>
+      <div class="p-6 text-2xl font-black tracking-wider border-b border-slate-800 flex items-center justify-between">
+        <div><span>B-</span><span class="text-orange-500">IA</span></div>
       </div>
       
-      <div class="px-4 pt-4 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">Caja y Transacciones</div>
-      <nav class="px-2 space-y-1 font-semibold">
-        <button id="nav-recargas" onclick="cambiarPestana('recargas')" class="w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition">
-          <i class="fa-solid fa-wallet w-5"></i> Métodos de Recarga
+      <div class="px-4 pt-4 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">Módulos</div>
+      <nav class="px-2 space-y-1 font-semibold flex-1">
+        <button id="nav-recargas" onclick="cambiarTipo('recarga')" class="w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition">
+          <i class="fa-solid fa-wallet w-5"></i> Recargas
         </button>
-        <button id="nav-retiros" onclick="cambiarPestana('retiros')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
-          <i class="fa-solid fa-hand-holding-dollar w-5"></i> Cobros y Retiros
+        <button id="nav-retiros" onclick="cambiarTipo('retiro')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
+          <i class="fa-solid fa-money-bill-transfer w-5"></i> Retiros
         </button>
       </nav>
 
-      <div class="px-4 pt-6 pb-2 text-xs font-bold text-slate-500 uppercase tracking-wider">Inteligencia de Mercado</div>
-      <nav class="px-2 space-y-1 font-semibold flex-1">
-        <button id="nav-cuotas" onclick="cambiarPestana('cuotas')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
-          <i class="fa-solid fa-chart-line w-5"></i> Comparativo Cuotas
-        </button>
-        <button id="nav-campanas" onclick="cambiarPestana('campanas')" class="w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition">
-          <i class="fa-solid fa-trophy w-5"></i> Campañas & Ganadores
-        </button>
-      </nav>
-      
+      <!-- Selector de Periodo Semanal -->
       <div class="p-4 border-t border-slate-800">
-        <button onclick="descargarPlanB()" class="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-3 rounded-xl transition shadow-lg">
-          <i class="fa-solid fa-file-excel text-sm"></i> Descargar Plan B (Excel)
-        </button>
+        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Periodo (Mes y Semana):</label>
+        
+        <select id="select-mes" onchange="actualizarPantalla()" class="w-full mb-2 bg-slate-950 border border-slate-700 text-slate-200 text-xs font-bold rounded-lg px-3 py-2 focus:outline-none">
+          <option value="2026-10" selected>Octubre 2026</option>
+          <option value="2026-11">Noviembre 2026</option>
+        </select>
+
+        <select id="select-semana" onchange="actualizarPantalla()" class="w-full bg-slate-950 border border-slate-700 text-slate-200 text-xs font-bold rounded-lg px-3 py-2 focus:outline-none">
+          <option value="sem1">Semana 1</option>
+          <option value="sem2">Semana 2</option>
+          <option value="sem3" selected>Semana 3</option>
+          <option value="sem4">Semana 4</option>
+        </select>
       </div>
     </aside>
 
     <!-- Main Content -->
     <main class="flex-1 overflow-y-auto p-8 bg-slate-950">
-      <header class="mb-8">
-        <h1 id="titulo-seccion" class="text-3xl font-extrabold text-white flex items-center gap-3">
-          <i class="fa-solid fa-wallet text-orange-500"></i> Métodos de Recarga
-        </h1>
-        <p id="subtitulo-seccion" class="text-slate-400 text-sm mt-1">Monitoreo de pasarelas, límites y tiempos de transacción.</p>
+      <header class="mb-8 flex justify-between items-center">
+        <div>
+          <h1 id="titulo-seccion" class="text-3xl font-extrabold text-white flex items-center gap-3">
+            <i class="fa-solid fa-wallet text-orange-500"></i> Métodos de Recarga
+          </h1>
+          <p class="text-slate-400 text-sm mt-1">Imágenes centralizadas desde el repositorio de evidencias.</p>
+        </div>
       </header>
 
-      <div id="contenedor-dinamico" class="pb-10">
-        <div class="text-slate-500 text-center py-12">Cargando datos en vivo...</div>
-      </div>
+      <div id="contenedor-dinamico" class="pb-10"></div>
     </main>
   </div>
 
-  <!-- Modal Flotante -->
-  <div id="modal-detalle" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative flex flex-col max-h-[85vh]">
-      <button onclick="cerrarModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold p-2">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-      <div id="modal-header" class="mb-4"></div>
-      <div id="modal-body" class="space-y-3 overflow-y-auto pr-2 flex-1"></div>
+  <!-- Modal Zoom -->
+  <div id="modal-zoom" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4 z-50" onclick="cerrarZoom()">
+    <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center">
+      <button onclick="cerrarZoom()" class="absolute -top-10 right-0 text-white text-xs font-bold bg-slate-800 px-3 py-1 rounded-lg">Cerrar (Esc)</button>
+      <img id="img-zoom" src="" class="max-h-[80vh] rounded-xl shadow-2xl border border-slate-700 object-contain">
     </div>
   </div>
 
   <script>
-    let globalData = null;
-    let pestanaActual = 'recargas';
+    const USUARIO = "fabrizioreano-bot";
+    const REPO = "evidencias-caja";
 
-    const datosMercado = {
-      cuotas: [
-        { operador: "DoradoBet", logo: "DB", color: "text-amber-500", evento: "Perú vs Brasil", L: "4.50", E: "3.20", V: "1.85" },
-        { operador: "Betano", logo: "BT", color: "text-orange-600", evento: "Perú vs Brasil", L: "4.65", E: "3.10", V: "1.80" },
-        { operador: "Te Apuesto", logo: "TA", color: "text-red-600", evento: "Perú vs Brasil", L: "4.20", E: "3.10", V: "1.75" }
-      ]
-    };
+    const marcas = [
+      { id: "te-apuesto", nombre: "Te Apuesto", color: "from-red-600 to-orange-600" },
+      { id: "doradobet", nombre: "DoradoBet", color: "from-amber-500 to-yellow-600" },
+      { id: "betano", nombre: "Betano", color: "from-orange-600 to-red-600" },
+      { id: "betsson", nombre: "Betsson", color: "from-amber-600 to-orange-500" },
+      { id: "apuesta-total", nombre: "Apuesta Total", color: "from-red-700 to-slate-900" },
+      { id: "olimpo", nombre: "Olimpo.bet", color: "from-blue-600 to-indigo-700" }
+    ];
 
-    async function cargarDatos() {
-      try {
-        const urlFetch = 'datos.json?nocache=' + new Date().getTime();
-        const res = await fetch(urlFetch);
-        if (!res.ok) throw new Error('No se pudo cargar datos.json');
-        globalData = await res.json();
-        renderizarVista();
-      } catch (e) {
-        document.getElementById('contenedor-dinamico').innerHTML = `<div class="text-red-400 text-center py-12">⚠️ Error de conexión: ${e.message}</div>`;
-      }
+    let tipoActual = 'recarga';
+
+    function cambiarTipo(tipo) {
+      tipoActual = tipo;
+      document.getElementById('nav-recargas').className = (tipo === 'recarga') ? "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition" : "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
+      document.getElementById('nav-retiros').className = (tipo === 'retiro') ? "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition" : "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
+      
+      document.getElementById('titulo-seccion').innerHTML = tipo === 'recarga' 
+          ? '<i class="fa-solid fa-wallet text-orange-500"></i> Métodos de Recarga'
+          : '<i class="fa-solid fa-money-bill-transfer text-emerald-500"></i> Métodos de Retiro';
+      
+      actualizarPantalla();
     }
 
-    function cambiarPestana(pestana) {
-      pestanaActual = pestana;
-      ['recargas', 'retiros', 'cuotas', 'campanas'].forEach(b => {
-        const btn = document.getElementById('nav-' + b);
-        btn.className = (b === pestana) 
-          ? "w-full text-left flex items-center gap-3 px-4 py-3 bg-orange-600 text-white rounded-xl shadow-lg transition"
-          : "w-full text-left flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-800 rounded-xl transition";
-      });
-
-      const titulos = {
-        'recargas': ['<i class="fa-solid fa-wallet text-orange-500"></i> Métodos de Recarga', 'Límites operativos y canales de ingreso.'],
-        'retiros': ['<i class="fa-solid fa-hand-holding-dollar text-orange-500"></i> Cobros y Retiros', 'Tiempos de pago y pasarelas de salida.'],
-        'cuotas': ['<i class="fa-solid fa-chart-line text-blue-500"></i> Comparativo Cuotas', 'Márgenes frente a la competencia.'],
-        'campanas': ['<i class="fa-solid fa-trophy text-yellow-500"></i> Campañas & Ganadores', 'Status de promociones y ganadores públicos.']
-      };
-
-      document.getElementById('titulo-seccion').innerHTML = titulos[pestana][0];
-      document.getElementById('subtitulo-seccion').innerText = titulos[pestana][1];
-      renderizarVista();
-    }
-
-    function renderizarVista() {
+    function actualizarPantalla() {
+      const mes = document.getElementById('select-mes').value;
+      const semana = document.getElementById('select-semana').value;
       const contenedor = document.getElementById('contenedor-dinamico');
-      contenedor.innerHTML = '';
+      
+      let html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
+      marcas.forEach(marca => {
+        const nombreArchivo = `${marca.id}-${tipoActual}-${mes}-${semana}.png`;
+        const urlFoto = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${nombreArchivo}?v=${new Date().getTime()}`;
 
-      if (pestanaActual === 'recargas' || pestanaActual === 'retiros') {
-        let html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
-        if(globalData && globalData.operadores) {
-          globalData.operadores.forEach((op, index) => {
-            const listaMetodos = pestanaActual === 'recargas' ? (op.recargas || []) : (op.retiros || []);
-            const metodosPrincipales = listaMetodos.slice(0, 4);
-            const cantidadRestante = listaMetodos.length - 4;
-
-            let itemsHtml = metodosPrincipales.map(r => {
-              const minVal = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
-              const maxVal = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
-              return `
-                <div class="p-3 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/60'} rounded-xl">
-                  <div class="flex justify-between items-center mb-1">
-                    <span class="text-xs font-bold text-white flex items-center gap-1.5">
-                      ${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400 text-sm"></i>' : '<i class="fa-solid fa-credit-card text-slate-500 text-xs"></i>'}
-                      ${r.canal}
-                    </span>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400">${r.tiempo}</span>
-                  </div>
-                  <div class="flex justify-between text-[11px] text-slate-400 mt-2 pt-2 border-t border-slate-800/80">
-                    <span>Mín: <strong class="text-slate-200">${minVal}</strong></span>
-                    <span>Máx: <strong class="text-slate-200">${maxVal}</strong></span>
-                  </div>
-                </div>
-              `;
-            }).join('');
-
-            const botonVerMas = cantidadRestante > 0 
-              ? `<button onclick="abrirModal(${index})" class="w-full py-2.5 mt-2 bg-slate-800 hover:bg-slate-700 text-orange-400 font-bold text-xs rounded-xl transition flex items-center justify-center gap-2">Ver todas las pasarelas (+${cantidadRestante}) <i class="fa-solid fa-chevron-right"></i></button>` 
-              : '';
-
-            html += `
-              <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
-                <div>
-                  <div class="p-4 bg-gradient-to-r ${op.color} flex items-center justify-between">
-                    <h3 class="text-lg font-bold text-white tracking-wide">${op.nombre}</h3>
-                    <span class="text-xs font-bold bg-black/40 px-2 py-1 rounded-lg text-white">${listaMetodos.length} Pasarelas</span>
-                  </div>
-                  <div class="p-4 space-y-2.5">${itemsHtml}</div>
-                </div>
-                <div class="px-4 pb-4">${botonVerMas}</div>
+        html += `
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col">
+            <div class="p-4 bg-gradient-to-r ${marca.color} flex justify-between items-center">
+              <h3 class="text-lg font-bold text-white">${marca.nombre}</h3>
+            </div>
+            
+            <div class="p-4 flex-1 flex items-center justify-center">
+              <div class="relative group cursor-pointer w-full bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-center min-h-[220px]" onclick="abrirZoom('${urlFoto}')">
+                <img src="${urlFoto}" class="w-full h-56 object-cover object-top rounded-xl" 
+                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\"p-6 text-center text-xs text-slate-500\"><i class=\"fa-regular fa-image text-3xl mb-2 block text-slate-600\"></i>Falta subir foto en tu repositorio:<br><strong class=\"text-orange-400 mt-2 block font-mono\">${nombreArchivo}</strong></div>';">
               </div>
-            `;
-          });
-        }
-        html += '</div>';
-        contenedor.innerHTML = html;
-
-      } else if (pestanaActual === 'cuotas') {
-        let filas = datosMercado.cuotas.map(c => `
-          <tr class="border-b border-slate-800 hover:bg-slate-800/50 transition">
-            <td class="p-4 font-bold text-white">${c.operador}</td>
-            <td class="p-4 text-slate-300">${c.evento}</td>
-            <td class="p-4"><span class="bg-slate-950 px-3 py-1 border border-slate-700 text-emerald-400 rounded">${c.L}</span></td>
-            <td class="p-4"><span class="bg-slate-950 px-3 py-1 border border-slate-700 text-slate-300 rounded">${c.E}</span></td>
-            <td class="p-4"><span class="bg-slate-950 px-3 py-1 border border-slate-700 text-emerald-400 rounded">${c.V}</span></td>
-          </tr>
-        `).join('');
-        contenedor.innerHTML = `<div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
-          <table class="w-full text-left text-sm"><thead class="bg-slate-950 text-slate-400 text-xs uppercase"><tr><th class="p-4">Operador</th><th class="p-4">Evento</th><th class="p-4">Local</th><th class="p-4">Empate</th><th class="p-4">Visita</th></tr></thead><tbody>${filas}</tbody></table></div>`;
-      
-      } else if (pestanaActual === 'campanas') {
-        let listaCampanas = (globalData && globalData.campanas_extraidas) ? globalData.campanas_extraidas : [];
-        let cards = listaCampanas.map(c => `
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 border-l-4 border-l-emerald-500">
-            <div class="flex justify-between"><span class="text-xs font-bold text-slate-400 uppercase">${c.operador} - ${c.tipo}</span><span class="text-xs text-emerald-400">${c.estado}</span></div>
-            <h3 class="text-xl font-bold text-white mt-1 mb-3">${c.nombre}</h3>
-            <p class="text-sm text-slate-300 border-t border-slate-800 pt-3"><i class="fa-solid fa-bullhorn mr-2 text-orange-400"></i>Ganadores: <strong>${c.ganadores}</strong></p>
+            </div>
           </div>
-        `).join('');
-        contenedor.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6">${cards || '<p class="text-slate-500">No hay campañas registradas.</p>'}</div>`;
-      }
+        `;
+      });
+      html += '</div>';
+      contenedor.innerHTML = html;
     }
 
-    function abrirModal(index) {
-      const op = globalData.operadores[index];
-      const listaMetodos = pestanaActual === 'recargas' ? op.recargas : op.retiros;
-      document.getElementById('modal-header').innerHTML = `<h2 class="text-2xl font-bold text-white">${op.nombre}</h2><p class="text-xs text-slate-400">Lista completa de pasarelas (${listaMetodos.length} opciones)</p>`;
-      
-      document.getElementById('modal-body').innerHTML = listaMetodos.map(r => {
-        const minL = pestanaActual === 'recargas' ? r.min_recarga : r.min_retiro;
-        const maxL = pestanaActual === 'recargas' ? r.max_recarga : r.max_retiro;
-        return `
-          <div class="p-4 border ${r.visa ? 'border-blue-500/50 bg-blue-950/20' : 'border-slate-800 bg-slate-950/80'} rounded-xl">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm font-bold text-white flex items-center gap-2">${r.visa ? '<i class="fa-brands fa-cc-visa text-blue-400"></i>' : '<i class="fa-solid fa-wallet text-slate-400"></i>'} ${r.canal}</span>
-              <span class="text-xs text-emerald-400">${r.tiempo}</span>
-            </div>
-            <div class="grid grid-cols-2 text-xs text-slate-300 pt-2 border-t border-slate-800">
-              <div>Mínimo: <strong class="text-white">${minL}</strong></div><div>Máximo: <strong class="text-white">${maxL}</strong></div>
-            </div>
-          </div>`;
-      }).join('');
-      document.getElementById('modal-detalle').classList.remove('hidden');
+    function abrirZoom(foto) {
+      document.getElementById('img-zoom').src = foto;
+      document.getElementById('modal-zoom').classList.remove('hidden');
     }
+    function cerrarZoom() { document.getElementById('modal-zoom').classList.add('hidden'); }
 
-    function cerrarModal() { document.getElementById('modal-detalle').classList.add('hidden'); }
-
-    function descargarPlanB() {
-      let csv = "SECCION,OPERADOR,DATO_1,DATO_2,DATO_3,ESTADO_GANADORES\nCUOTAS,DoradoBet,Perú vs Brasil,Local: 4.50,Visita: 1.85,-\nCAMPAÑAS,DoradoBet,Sorteo Camiseta,Mecánica: Apuesta 50,-,No publicados aún\n";
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
-      a.download = `Matriz_PlanB_Manual_${new Date().toISOString().slice(0,10)}.csv`;
-      a.click();
-    }
-
-    cargarDatos();
+    actualizarPantalla();
   </script>
 </body>
 </html>
