@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 14/10/2026 13:26",
+  "ultima_actualizacion": "Última extracción automática: 15/10/2026 13:33",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,21 +277,14 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP VIRTUALES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP VIRTUALES",
-      "estado": "Activa",
-      "ganadores": "Automático (Scraping)"
-    },
-    {
-      "operador": "Apuesta-total",
-      "tipo": "Detectada en Web",
-      "nombre": "20 freespins por tu aniversario AT",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -299,6 +292,13 @@
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
       "nombre": "Combo Bonus",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Apuesta-total",
+      "tipo": "Detectada en Web",
+      "nombre": "Regístrate y elige tu regalo de bienvenida",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
