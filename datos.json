@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 15/10/2026 13:33",
+  "ultima_actualizacion": "Última extracción automática: 16/10/2026 13:30",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,28 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP VIRTUALES",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP VIRTUALES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Combo Bonus",
+      "nombre": "Pago Anticipado",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Regístrate y elige tu regalo de bienvenida",
+      "nombre": "Tesoro Prohibido",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
