@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 16/10/2026 13:30",
+  "ultima_actualizacion": "Última extracción automática: 17/10/2026 13:20",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Pago Anticipado",
+      "nombre": "BONO BILLETERA AT BIENVENIDA – 2026",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Tesoro Prohibido",
+      "nombre": "WEEKEND RUSH",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
