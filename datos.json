@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 18/10/2026 13:20",
+  "ultima_actualizacion": "Última extracción automática: 19/10/2026 13:34",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,49 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "Access denied",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP VIRTUALES",
+      "nombre": "What happened?",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Betano",
+      "tipo": "Detectada en Web",
+      "nombre": "Gestionar preferencias de consentimiento",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Betano",
+      "tipo": "Detectada en Web",
+      "nombre": "Lista de cookies",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Freebet betbuilder S/15",
+      "nombre": "ENDULZADA MILLONARIA",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Pago Anticipado",
+      "nombre": "WEEKEND RUSH",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Betsson",
+      "tipo": "Detectada en Web",
+      "nombre": "Join the greatest gaming experience",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
