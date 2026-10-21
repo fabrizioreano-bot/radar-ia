@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 20/10/2026 13:31",
+  "ultima_actualizacion": "Última extracción automática: 21/10/2026 13:31",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,28 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "EL BAR DEL TIO VOL.2",
+      "nombre": "¡Sin escape por Playson!",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "ENDULZADA MILLONARIA",
+      "nombre": "Promociones",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
