@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 22/10/2026 13:36",
+  "ultima_actualizacion": "Última extracción automática: 23/10/2026 13:30",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,14 +277,21 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "DEPORTES",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Apuesta-total",
+      "tipo": "Detectada en Web",
+      "nombre": "Apuesta gratis de bienvenida tiendas",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -292,13 +299,6 @@
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
       "nombre": "Compartir Apuesta",
-      "estado": "Activa",
-      "ganadores": "Automático (Scraping)"
-    },
-    {
-      "operador": "Apuesta-total",
-      "tipo": "Detectada en Web",
-      "nombre": "CASINERO HASTA LA MUERTE",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
