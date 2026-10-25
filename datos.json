@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 24/10/2026 13:24",
+  "ultima_actualizacion": "Última extracción automática: 25/10/2026 13:23",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,7 +291,7 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "WEEKEND RUSH",
+      "nombre": "Duplicamos tu primera recarga",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
