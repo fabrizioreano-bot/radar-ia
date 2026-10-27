@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 26/10/2026 15:07",
+  "ultima_actualizacion": "Última extracción automática: 27/10/2026 13:40",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,7 +277,7 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "FREEBET REVIVE TU SUERTE S/50",
+      "nombre": "Recarga los lunes y llévate 50% más en bono",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "20 freespins por tu aniversario AT",
+      "nombre": "TERROR TOTAL",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
