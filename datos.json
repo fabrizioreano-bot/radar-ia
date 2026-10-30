@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 29/10/2026 13:49",
+  "ultima_actualizacion": "Última extracción automática: 30/10/2026 13:48",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,28 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "DULCE O TRUCO...O TESORO",
+      "nombre": "SÍGUENOS Y MANTENTE EN EL JUEGO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "¡Sin escape por Playson!",
+      "nombre": "Condiciones Generales de Promociones",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
