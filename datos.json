@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 30/10/2026 13:48",
+  "ultima_actualizacion": "Última extracción automática: 31/10/2026 17:28",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,7 +277,7 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "SÍGUENOS Y MANTENTE EN EL JUEGO",
+      "nombre": "Duplicamos tu primera recarga",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Condiciones Generales de Promociones",
+      "nombre": "Promociones",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
