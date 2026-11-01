@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 31/10/2026 17:28",
+  "ultima_actualizacion": "Última extracción automática: 01/11/2026 18:14",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,21 +277,14 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
-      "estado": "Activa",
-      "ganadores": "Automático (Scraping)"
-    },
-    {
-      "operador": "Apuesta-total",
-      "tipo": "Detectada en Web",
-      "nombre": "Duplicamos tu primera recarga",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -299,6 +292,13 @@
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
       "nombre": "Promociones",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Apuesta-total",
+      "tipo": "Detectada en Web",
+      "nombre": "WEEKEND RUSH",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
