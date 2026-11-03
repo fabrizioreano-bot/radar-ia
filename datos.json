@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 02/11/2026 22:01",
+  "ultima_actualizacion": "Última extracción automática: 03/11/2026 19:55",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,28 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "SÍGUENOS Y MANTENTE EN EL JUEGO",
+      "nombre": "Arena de Retos",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Aciértale al Clásico",
+      "nombre": "Truco o Premio",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
