@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 03/11/2026 19:55",
+  "ultima_actualizacion": "Última extracción automática: 04/11/2026 20:10",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Arena de Retos",
+      "nombre": "Promociones",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Truco o Premio",
+      "nombre": "Días de suerte",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
