@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 04/11/2026 20:10",
+  "ultima_actualizacion": "Última extracción automática: 05/11/2026 20:41",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -284,21 +284,21 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Promociones",
+      "nombre": "Compartir Apuesta",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Días de suerte",
+      "nombre": "¡Vampiresa Casinera!",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
