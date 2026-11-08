@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 07/11/2026 17:55",
+  "ultima_actualizacion": "Última extracción automática: 08/11/2026 18:10",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -284,21 +284,21 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "BONO BILLETERA AT BIENVENIDA – 2026",
+      "nombre": "Condiciones Generales de Promociones",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Apuesta gratis de bienvenida tiendas",
+      "nombre": "Regístrate y elige tu regalo de bienvenida",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
