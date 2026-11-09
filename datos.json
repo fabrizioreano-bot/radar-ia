@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 08/11/2026 18:10",
+  "ultima_actualizacion": "Última extracción automática: 09/11/2026 22:48",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Condiciones Generales de Promociones",
+      "nombre": "¡Premiaton por Playson!",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Regístrate y elige tu regalo de bienvenida",
+      "nombre": "La Liga que Suma",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
