@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 09/11/2026 22:48",
+  "ultima_actualizacion": "Última extracción automática: 10/11/2026 20:07",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "¡Premiaton por Playson!",
+      "nombre": "Combo Bonus",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "La Liga que Suma",
+      "nombre": "Arena de Retos",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
