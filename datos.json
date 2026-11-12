@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 11/11/2026 19:56",
+  "ultima_actualizacion": "Última extracción automática: 12/11/2026 20:34",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "BONO BILLETERA AT BIENVENIDA – 2026",
+      "nombre": "¡5 de 5! E-Fútbol",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Condiciones Generales de Promociones",
+      "nombre": "Arena de Retos",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
