@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 12/11/2026 20:34",
+  "ultima_actualizacion": "Última extracción automática: 13/11/2026 20:11",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,7 +277,7 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "¡5 de 5! E-Fútbol",
+      "nombre": "Leyendas coleccionables por hacksaw!",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Arena de Retos",
+      "nombre": "DIOSES DEL SPIN - FOOTBALL EDITION",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
