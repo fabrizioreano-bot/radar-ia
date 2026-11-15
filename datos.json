@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 14/11/2026 18:37",
+  "ultima_actualizacion": "Última extracción automática: 15/11/2026 19:12",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,7 +277,7 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Apuesta gratis de bienvenida tiendas",
+      "nombre": "20 freespins por tu aniversario AT",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "¡5 de 5! E-Fútbol",
+      "nombre": "Regístrate y elige tu regalo de bienvenida",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
