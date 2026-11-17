@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 16/11/2026 22:40",
+  "ultima_actualizacion": "Última extracción automática: 17/11/2026 21:28",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,28 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Condiciones Generales de Promociones",
+      "nombre": "Combo Bonus",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Duelo de Cuotas",
+      "nombre": "CHAPA TU PREMIO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
