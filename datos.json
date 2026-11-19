@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 18/11/2026 21:01",
+  "ultima_actualizacion": "Última extracción automática: 19/11/2026 21:06",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,21 +277,14 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO",
-      "estado": "Activa",
-      "ganadores": "Automático (Scraping)"
-    },
-    {
-      "operador": "Apuesta-total",
-      "tipo": "Detectada en Web",
-      "nombre": "BLACK SPIN FRIDAY",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
@@ -299,6 +292,13 @@
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
       "nombre": "Pago Anticipado",
+      "estado": "Activa",
+      "ganadores": "Automático (Scraping)"
+    },
+    {
+      "operador": "Apuesta-total",
+      "tipo": "Detectada en Web",
+      "nombre": "Cazadores de Tesoros y Suerte",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
