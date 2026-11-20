@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 19/11/2026 21:06",
+  "ultima_actualizacion": "Última extracción automática: 20/11/2026 20:52",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -284,21 +284,21 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Pago Anticipado",
+      "nombre": "TITANES DEL LIVE- FOOTBALL EDITION",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Cazadores de Tesoros y Suerte",
+      "nombre": "CHAPA TU PREMIO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
