@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 21/11/2026 19:53",
+  "ultima_actualizacion": "Última extracción automática: 22/11/2026 20:04",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,28 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO",
+      "nombre": "TOP CASINO EN VIVO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Combo Bonus",
+      "nombre": "20 freespins por tu aniversario AT",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "FREEBET COMBI GANADORA S/40",
+      "nombre": "GOLDEN COINS RUSH",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
