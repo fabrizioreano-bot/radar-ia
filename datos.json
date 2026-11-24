@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 22/11/2026 20:04",
+  "ultima_actualizacion": "Última extracción automática: 24/11/2026 00:31",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -284,21 +284,21 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO EN VIVO",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "20 freespins por tu aniversario AT",
+      "nombre": "DESCARGA NUESTRA APP OFICIAL",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "GOLDEN COINS RUSH",
+      "nombre": "10 FREE SPINS SUGAR TEDDY 2",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
