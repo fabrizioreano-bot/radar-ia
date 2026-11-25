@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 24/11/2026 22:51",
+  "ultima_actualizacion": "Última extracción automática: 25/11/2026 22:04",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -277,28 +277,28 @@
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "TOP CASINO",
+      "nombre": "DEPORTES",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Doradobet",
       "tipo": "Detectada en Web",
-      "nombre": "DEPORTES",
+      "nombre": "TOP CASINO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Compartir Apuesta",
+      "nombre": "¡Premiaton por Playson!",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Promociones",
+      "nombre": "GOLDEN COINS RUSH",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
