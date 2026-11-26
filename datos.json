@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 25/11/2026 22:04",
+  "ultima_actualizacion": "Última extracción automática: 26/11/2026 22:02",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "¡Premiaton por Playson!",
+      "nombre": "Regístrate y elige tu regalo de bienvenida",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "GOLDEN COINS RUSH",
+      "nombre": "Compartir Apuesta",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
