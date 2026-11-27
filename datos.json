@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "Última extracción automática: 26/11/2026 22:02",
+  "ultima_actualizacion": "Última extracción automática: 27/11/2026 21:46",
   "operadores": [
     {
       "id": "te-apuesto",
@@ -291,14 +291,14 @@
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Regístrate y elige tu regalo de bienvenida",
+      "nombre": "Ponte Fino | NBA",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     },
     {
       "operador": "Apuesta-total",
       "tipo": "Detectada en Web",
-      "nombre": "Compartir Apuesta",
+      "nombre": "SÍGUENOS Y MANTENTE EN EL JUEGO",
       "estado": "Activa",
       "ganadores": "Automático (Scraping)"
     }
